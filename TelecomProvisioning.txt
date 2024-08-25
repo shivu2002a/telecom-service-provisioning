@@ -1,0 +1,66 @@
+Telecom provisioning system
+
+Client 
+Admin
+Application
+
+Customers 
+-- Signup/login
+-- Avail services (automatically subsribed)
+-- Modify services
+-- Terminate services
+
+Admin
+-- Create services
+-- Modify services (configure new details / change existing details)
+-- Remove services 
+
+Services needed
+1. Internet plans 
+2. Tv recharge plans
+3. Wifi plans
+
+
+Mysql Database Tables:
+1. Users
+2. InternetServices
+3. TvServices
+4. TvServicesAvailed
+5. InternetServicesAvailed
+
+
+Scenarios
+1. A plan is updated. But the new changes should not reflect to the already subscribed customers. 
+2. Updated plans should have policy which mentions either for existing/new customers.
+3. Separate old plans and new plans by a flag or boolean.
+4. help page / contact page
+
+-----------------------------------------------------------------------------------------------------------------------------
+Internet plans:
+
+Home internet
+1. 1000 gb 5G data Data, Speed D/U 317/36
+2. Basic NBN plans (unlimited data) Speed D/U 317/36
+3. Essential nbn (unlimited data)
+4. Premium nbn (unlimited data)
+5. Ultimate 
+6. Ultrafast
+
+Mobile broadband
+1. Data + mobile
+2. Sim only data plans
+3. Prepaid plans
+
+
+
+
+
+
+Upcoming:
+1. Notification
+2. Billing
+
+Diagrams:
+Class, Sequence, Use case, ER, High Level
+
+
