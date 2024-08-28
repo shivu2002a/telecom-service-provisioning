@@ -1,4 +1,5 @@
 package com.telecom.telecom_service_provisioning.model;
+import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,28 +13,29 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "TvServices")
-public class TvService {
+@Table(name = "PendingRequests")
+public class PendingRequest implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "requestID")
+    private Integer requestId;
+
+    @Column(name = "ServiceID")
     private Integer serviceId;
 
-    @Column(name = "ServiceName", nullable = false, length = 100)
-    private String serviceName;
+    @Column(name = "userID")
+    private Integer userId;
 
-    @Column(name = "Description")
-    private String description;
+    @Column(name = "serviceType", length = 20)
+    private String serviceType;
 
-    @Column(name = "benefits")
-    private String benefits;
+    @Column(name = "requestStatus", length = 15)
+    private String requestStatus;
 
-    @Column(name = "criteria")
-    private String criteria;
+    @Column(name = "remarks", length = 100)
+    private String remarks;
 
     @Column(name = "active")
     private Boolean active;
-
-    @Column(name = "MonthlyCost", precision = 10, scale = 2)
-    private Double monthlyCost;
 }

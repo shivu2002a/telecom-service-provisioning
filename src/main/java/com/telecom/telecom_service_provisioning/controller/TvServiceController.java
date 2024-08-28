@@ -1,5 +1,5 @@
 package com.telecom.telecom_service_provisioning.controller;
 
-public class ServiceController {
+public class TvServiceController {
     
 }
