@@ -32,8 +32,8 @@ public class User {
     @Column(name = "password", length = 50)
     private String password;
 
-    @Column(name = "phoneno", length = 10)
-    private String phoneNo;
+    // @Column(name = "phoneno", length = 10)
+    // private String phoneNo;
 
     @Column(name = "CreatedAt", nullable = false, updatable = false)
     private Timestamp createdAt;

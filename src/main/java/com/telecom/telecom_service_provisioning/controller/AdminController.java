@@ -12,29 +12,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.service.PendingRequestService;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin
 public class AdminController {
     
-    //Create
-    //Read
-    //Update
-    //Delete
-    //Read pending requests
-    //Update pending requests
+    // Create a service
+    // Read services
+    // Update a service
+    // Delete a service
+    // Read pending requests
+    // Update pending requests
 
     @Autowired
-    private PendingRequestService pendingRequestsService;
+    private PendingRequestService pendingRequestService;
 
     @GetMapping("/api/approval-requests")
     public List<PendingRequest> getAllPendingRequests(){ 
-        return pendingRequestsService.getAllPendingRequest();
+        return pendingRequestService.getAllPendingRequest();
     }
     
     @PatchMapping("/api/approval-requests")
-    public List<PendingRequest> updatePendingRequest(){ 
-        return pendingRequestsService.getAllPendingRequest();
+    public void updatePendingRequest(@RequestBody PendingRequest pendingRequest){ 
+        pendingRequestService.updatePendingRequest(pendingRequest);
     }
 
 

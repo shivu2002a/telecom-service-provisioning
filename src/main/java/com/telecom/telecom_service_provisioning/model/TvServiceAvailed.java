@@ -2,7 +2,7 @@ package com.telecom.telecom_service_provisioning.model;
 
 import java.time.LocalDate;
 
-import com.telecom.telecom_service_provisioning.model.compositekeyModels.InternetServicesAvailedId;
+import com.telecom.telecom_service_provisioning.model.compositekeyModels.TvServicesAvailedId;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "InternetServicesAvailed")
-@IdClass(InternetServicesAvailedId.class)
-public class InternetServicesAvailed {
+@Table(name = "TvServicesAvailed")
+@IdClass(TvServicesAvailedId.class)
+public class TvServiceAvailed {
 
     @Id
     @Column(name = "UserID")
@@ -42,6 +42,5 @@ public class InternetServicesAvailed {
 
     @ManyToOne
     @JoinColumn(name = "ServiceID", insertable = false, updatable = false)
-    private InternetService internetService;
+    private TvService tvService;
 }
-
