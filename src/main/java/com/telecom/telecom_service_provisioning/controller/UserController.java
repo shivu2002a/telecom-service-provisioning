@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/internet-services")
-public class InternetServiceController {
+@RequestMapping("/user")
+public class UserController {
     
-    //Get all Services
-    //Get details of a service
-    //subscribe to a service
-    
+    // Get subscribed services
+    // Upgrade 
+    // Downgrade
+    // Terminate service
 }
