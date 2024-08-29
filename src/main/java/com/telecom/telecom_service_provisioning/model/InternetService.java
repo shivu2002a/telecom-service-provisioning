@@ -1,5 +1,6 @@
 package com.telecom.telecom_service_provisioning.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,20 +10,23 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "InternetServices")
-public class InternetService {
+//@JsonIgnoreProperties(ignoreUnknown = true)
+public class InternetService implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer serviceId;
 
-    @Column(name = "ServiceName", nullable = false, length = 100)
+    @Column(name = "serviceName", nullable = false, length = 100)
     private String serviceName;
 
-    @Column(name = "Description")
+    @Column(name = "description")
     private String description;
 
     @Column(name = "serviceType", length = 50)
@@ -43,6 +47,7 @@ public class InternetService {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "MonthlyCost", precision = 10, scale = 2)
+    @Column(name = "monthlyCost", precision = 10)
     private Double monthlyCost;
+
 }

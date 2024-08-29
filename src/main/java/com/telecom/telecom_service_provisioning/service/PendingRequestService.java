@@ -15,14 +15,17 @@ public class PendingRequestService {
     private PendingRequestRepository pendingRequestsRepo;
 
     public List<PendingRequest> getAllPendingRequest() {
-        return pendingRequestsRepo.findAll();
+        return pendingRequestsRepo.findByActiveTrue();
     }
 
     public void createPendingRequest(PendingRequest pendingRequest) {
         pendingRequestsRepo.save(pendingRequest);
     }
 
-    public void updatePendingRequest(PendingRequest pendingRequest) {
+    public void updatePendingRequest(PendingRequest pendingRequest,String requestStatus,String remarks) {
+        pendingRequest.setRequestStatus(requestStatus);
+        pendingRequest.setRemarks(remarks);
+        pendingRequest.setActive(false);
         pendingRequestsRepo.save(pendingRequest);
     }
 

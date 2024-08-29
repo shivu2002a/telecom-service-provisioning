@@ -62,7 +62,7 @@ CREATE TABLE PendingRequests (
     ServiceID INT,
     userID INT,
     serviceType VARCHAR(20),
-    reuestStatus VARCHAR(15),
+    requestStatus VARCHAR(15),
     remarks VARCHAR(100),
     active boolean
 

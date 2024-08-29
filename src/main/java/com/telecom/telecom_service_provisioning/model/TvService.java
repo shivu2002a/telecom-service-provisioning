@@ -19,10 +19,10 @@ public class TvService {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer serviceId;
 
-    @Column(name = "ServiceName", nullable = false, length = 100)
+    @Column(name = "serviceName", nullable = false, length = 100)
     private String serviceName;
 
-    @Column(name = "Description")
+    @Column(name = "description")
     private String description;
 
     @Column(name = "benefits")
@@ -34,6 +34,6 @@ public class TvService {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "MonthlyCost", precision = 10, scale = 2)
+    @Column(name = "monthlyCost", precision = 10)
     private Double monthlyCost;
 }

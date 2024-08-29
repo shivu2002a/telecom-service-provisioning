@@ -1,5 +1,6 @@
 package com.telecom.telecom_service_provisioning.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.telecom.telecom_service_provisioning.model.compositekeyModels.InternetServicesAvailedId;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "InternetServicesAvailed")
 @IdClass(InternetServicesAvailedId.class)
-public class InternetServiceAvailed {
+public class InternetServiceAvailed implements Serializable {
 
     @Id
     @Column(name = "UserID")

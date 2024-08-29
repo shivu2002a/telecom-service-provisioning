@@ -38,4 +38,5 @@ public class PendingRequest implements Serializable {
 
     @Column(name = "active")
     private Boolean active;
+
 }
