@@ -1,12 +1,8 @@
 package com.telecom.telecom_service_provisioning.model;
 import java.io.Serializable;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,8 +26,9 @@ public class PendingRequest implements Serializable {
     @Column(name = "serviceType", length = 20)
     private String serviceType;
 
-    @Column(name = "requestStatus", length = 15)
-    private String requestStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "requestStatus", length = 50)
+    private PendingRequestStatus requestStatus;
 
     @Column(name = "remarks", length = 100)
     private String remarks;

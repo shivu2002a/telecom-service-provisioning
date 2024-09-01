@@ -1,6 +1,15 @@
 package com.telecom.telecom_service_provisioning.model;
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.engine.internal.Collections;
+import org.hibernate.mapping.Collection;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,27 +23,62 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Column(name = "FirstName", nullable = false, length = 50)
-    private String firstName;
-
-    @Column(name = "LastName", nullable = false, length = 50)
-    private String lastName;
+    @Column(name = "username", nullable = false, length = 50)
+    private String username;
 
     @Column(name = "Email", nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(name = "password", length = 50)
+    @Column(name = "role", nullable = false)
+    private String role;
+
+    @Column(name = "password")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) 
     private String password;
 
-    // @Column(name = "phoneno", length = 10)
-    // private String phoneNo;
-
     @Column(name = "CreatedAt", nullable = false, updatable = false)
+    @CreationTimestamp
     private Timestamp createdAt;
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
+        return java.util.Collections.singletonList(new SimpleGrantedAuthority(role));
+    }
+
 }
