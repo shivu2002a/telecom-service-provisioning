@@ -12,6 +12,7 @@ public class TvServiceController {
 
     //Get all Services
     //Get details of a service
-    //subscribe to a service
     
+    //subscribe to a service
+
 }

@@ -43,6 +43,6 @@ public class InternetService {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "MonthlyCost", precision = 10, scale = 2)
+    @Column(name = "MonthlyCost")
     private Double monthlyCost;
 }

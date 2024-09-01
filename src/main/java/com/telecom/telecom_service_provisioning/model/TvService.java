@@ -1,11 +1,6 @@
 package com.telecom.telecom_service_provisioning.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,9 +26,9 @@ public class TvService {
     @Column(name = "criteria")
     private String criteria;
 
-    @Column(name = "active")
+    @Column(name = "active", columnDefinition = "tinyint default 0")
     private Boolean active;
 
-    @Column(name = "MonthlyCost", precision = 10, scale = 2)
+    @Column(name = "MonthlyCost")
     private Double monthlyCost;
 }
