@@ -57,7 +57,7 @@ public class AdminController {
 
 
     //Terminate Internet Services
-    @PostMapping("/api/internet-service")
+    @DeleteMapping("/api/internet-service")
     public ResponseEntity<String> terminateInternetServices(@RequestParam Integer id) throws ResourceNotFoundException {
         adminService.terminateInternetService(id);
         return new ResponseEntity<String>("Terminated Successfully", HttpStatus.OK);
@@ -86,7 +86,7 @@ public class AdminController {
 
 
     //Terminate Tv Services
-    @PatchMapping("/api/tv-service")
+    @DeleteMapping("/api/tv-service")
     public ResponseEntity<String> terminateTvServices(@RequestParam Integer id) throws ResourceNotFoundException {
         adminService.terminateTvService(id);
         return new ResponseEntity<>("Terminated Successfully", HttpStatus.OK);
