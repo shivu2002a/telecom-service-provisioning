@@ -1,4 +1,4 @@
-package com.telecom.telecom_service_provisioning.service;
+package com.telecom.telecom_service_provisioning.service.implementations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,7 +9,7 @@ import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.repository.UserRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;

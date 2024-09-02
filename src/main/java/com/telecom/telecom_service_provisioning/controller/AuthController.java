@@ -3,9 +3,6 @@ package com.telecom.telecom_service_provisioning.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.EmailAlreadyTakenException;
 import com.telecom.telecom_service_provisioning.model.User;
-import com.telecom.telecom_service_provisioning.service.AuthorizationService;
+import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
 
 @RestController
 @CrossOrigin
@@ -31,7 +28,7 @@ public class AuthController {
     
 
     @Autowired
-    public AuthorizationService authService;
+    public AuthenticationServiceImpl authService;
     
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody User user) throws EmailAlreadyTakenException {
@@ -41,22 +38,8 @@ public class AuthController {
     
 
     @GetMapping("/checkLoggedInUser")
-    public String getUserDetails() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-
-            if (principal instanceof UserDetails) {
-                UserDetails userDetails = (UserDetails) principal;
-                // Use the userDetails object as needed
-                System.out.println("Logged in user: " + userDetails.getUsername() + " " + userDetails.getAuthorities());
-            } else {
-                // Handle other principal types
-                System.out.println("Logged in user: " + principal.toString());
-            }
-        }
-        return "Logged in user: ";
+    public ResponseEntity<User> getUserDetails() {
+        return new ResponseEntity<User>(authService.getCurrentUserDetails(), HttpStatus.OK);
     }
     
     @GetMapping("/home")
