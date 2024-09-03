@@ -101,7 +101,7 @@ public class AdminController {
 
 
     @GetMapping("/api/approval-requests")
-    public ResponseEntity<List<PendingRequest>> getAllPendingRequests(){ 
+    public ResponseEntity<List<PendingRequest>> getAllPendingRequests(){
         return new ResponseEntity<>(pendingRequestService.getAllPendingRequest(), HttpStatus.OK);
     }
 }

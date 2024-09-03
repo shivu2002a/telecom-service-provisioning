@@ -12,4 +12,6 @@ import com.telecom.telecom_service_provisioning.model.compositekeyModels.TvServi
 @Repository
 public interface TvServiceAvailedRepository extends JpaRepository<TvServiceAvailed, TvServicesAvailedId> {
     
+    java.util.List<TvServiceAvailed> findByUserIdAndActiveTrue(Integer userId);
+
 }

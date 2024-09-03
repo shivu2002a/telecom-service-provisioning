@@ -1,48 +1,45 @@
-// package com.telecom.telecom_service_provisioning.service.implementations;
-// import java.time.LocalDate;
-// import java.util.List;
-// import java.util.Optional;
-// import java.util.stream.Collectors;
+package com.telecom.telecom_service_provisioning.service.implementations;
+import java.time.LocalDate;
 
-// import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-// import com.telecom.telecom_service_provisioning.model.InternetService;
-// import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
-// import com.telecom.telecom_service_provisioning.model.compositekeyModels.InternetServicesAvailedId;
-// import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
-// import com.telecom.telecom_service_provisioning.repository.InternetServiceRepository;
+import com.telecom.telecom_service_provisioning.dto.AvailedServices;
+import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
+import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 
-// public class UserService {
+@Service
+public class UserService {
 
-//     @Autowired
-//     private InternetServiceAvailedRepository internetServiceAvailedRepository;
+    @Autowired
+    private AvailedInternetServiceManager availedInternetService;
 
-//     public List<InternetServiceAvailed> getActiveSubscribedServices(Integer userId) {
-//         List<InternetServiceAvailed> allServices = internetServiceAvailedRepository.findByUserId(userId);
-//         return allServices.stream()
-//                 // .filter(InternetServiceAvailed::getActive)
-//                 .collect(Collectors.toList());
-//     }
+    @Autowired
+    private AuthenticationServiceImpl authService;
 
-//     public void deactivateService(Integer userId, Integer serviceId, LocalDate startDate) {
-//         InternetServicesAvailedId id = new InternetServicesAvailedId(userId, serviceId, startDate);
-//         Optional<InternetServiceAvailed> serviceAvailed = internetServiceAvailedRepository.findById(id);
-//         if (serviceAvailed.isPresent()) {
-//             InternetServiceAvailed serviceToUpdate = serviceAvailed.get();
-//             // serviceToUpdate.setActive(false);
-//             internetServiceAvailedRepository.save(serviceToUpdate);
-//         }
-//     }
+    @Autowired
+    private AvailedTvServiceManager availedTvService;
 
-//      @Autowired
-//     private InternetServiceRepository internetServiceRepository;
+    public AvailedServices getAllSubscribedServices() {
+        Integer userId = authService.getCurrentUserDetails().getUserId();
+        java.util.List<InternetServiceAvailed> availedInternetServices = availedInternetService.getActiveSubscribedServices(userId);
+        java.util.List<TvServiceAvailed> availedTvServices = availedTvService.getActiveSubscribedServices(userId);
+        
+        AvailedServices availedServices = new AvailedServices();
+        if (availedInternetServices.isEmpty() && availedTvServices.isEmpty()) {
+            return availedServices;
+        }
+        availedServices.setInternetServicesAvailed(availedInternetServices); 
+        availedServices.setTvServicesAvailed(availedTvServices); 
+        return availedServices;
+    }
 
-//     public List<InternetService> findAllExceptType(String excludedServiceType) {
-//         return internetServiceRepository.findByServiceTypeNot(excludedServiceType);
-//     }
+    public void deactivateInternetService(Integer availedServiceId, LocalDate startDate) throws Exception {
+        availedInternetService.deactivateService(availedServiceId, startDate);
+    }
 
-//     public List<InternetService> findAll() {
-//         return internetServiceRepository.findAll();
-//     }
+    public void deactivateTvService(Integer availedServiceId, LocalDate startDate)throws Exception{
+        availedTvService.deactivateService(availedServiceId, startDate);
+    }
     
-// }
+}

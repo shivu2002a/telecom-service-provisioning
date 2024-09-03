@@ -40,7 +40,7 @@ public class InternetService {
     @Column(name = "criteria")
     private String criteria;
 
-    @Column(name = "active")
+    @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
 
     @Column(name = "MonthlyCost")

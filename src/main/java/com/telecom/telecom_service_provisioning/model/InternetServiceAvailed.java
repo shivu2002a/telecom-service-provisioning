@@ -43,5 +43,8 @@ public class InternetServiceAvailed {
     @ManyToOne
     @JoinColumn(name = "ServiceID", insertable = false, updatable = false)
     private InternetService internetService;
+
+    @Column(name = "active", columnDefinition = "tinyint default 1")
+    private Boolean active;
 }
 

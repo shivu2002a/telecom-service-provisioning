@@ -79,4 +79,8 @@ public class InternetServiceManager {
         availed.setUser(currentUser);
         internetServiceAvailedRepo.save(availed);
     }
+
+    public List<InternetService> getInternetServicesForUpgradeDowngrade(String serviceName, String serviceType) {
+        return internetServiceRepo.findByActiveTrueAndServiceNameAndServiceTypeExcept(serviceName,serviceType);
+    }
 }
