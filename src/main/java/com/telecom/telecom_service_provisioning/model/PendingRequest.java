@@ -36,6 +36,6 @@ public class PendingRequest implements Serializable {
     @Column(name = "remarks", length = 100)
     private String remarks;
 
-    @Column(name = "active", columnDefinition = "tinyint default 0")
+    @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
 }

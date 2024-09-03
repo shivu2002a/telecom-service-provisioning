@@ -9,6 +9,9 @@ import com.telecom.telecom_service_provisioning.model.TvService;
 
 @Repository
 public interface TvServiceRepository extends JpaRepository<TvService, Integer> {
+    
     List<TvService> findByActiveTrue();
     
+    List<TvService> findByActiveTrueAndServiceNameAndServiceTypeExcept(String serviceName, String serviceType);
+
 } 

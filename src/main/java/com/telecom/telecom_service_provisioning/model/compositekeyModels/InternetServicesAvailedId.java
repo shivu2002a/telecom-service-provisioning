@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import lombok.Data;
+
+@Data
 public class InternetServicesAvailedId implements Serializable {
 
     private Integer userId;

@@ -37,4 +37,7 @@ public class TvServiceAvailed {
     @ManyToOne
     @JoinColumn(name = "ServiceID", insertable = false, updatable = false)
     private TvService tvService;
+
+    @Column(name = "active", columnDefinition = "tinyint default 1")
+    private Boolean active;
 }

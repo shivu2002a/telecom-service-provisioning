@@ -30,9 +30,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers("/signup", "/login", "/checkLoggedInUser").permitAll() // Updated
                                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers("/user/**").hasAuthority("ROLE_USER")
                                 .anyRequest().authenticated())
-                .formLogin((form) -> form.defaultSuccessUrl("/home")) // Use defaults for form login
-                .logout((logout) -> logout.logoutSuccessUrl("/signin")); // Use defaults for logout
+                .formLogin((form) -> form.defaultSuccessUrl("/home"))// Use defaults for form login
+                .logout((logout) -> logout.logoutSuccessUrl("/home")); // Use defaults for logout
                 return http.build();
         }
 

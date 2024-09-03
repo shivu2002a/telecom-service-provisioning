@@ -9,5 +9,9 @@ import com.telecom.telecom_service_provisioning.model.InternetService;
 
 @Repository
 public interface InternetServiceRepository extends JpaRepository<InternetService, Integer>{
+    
     List<InternetService> findByActiveTrue();
+
+    List<InternetService> findByActiveTrueAndServiceNameAndServiceTypeExcept(String serviceName, String serviceType);
+
 }
