@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
-import com.telecom.telecom_service_provisioning.constant.PendingRequestType;
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
@@ -48,7 +48,8 @@ public class InternetServiceManager {
                                     .orElseThrow(() -> new ResourceNotFoundException("PendingRequest with id: " + serviceId + " doesn't exists"));
         if (service.getCriteria() == null || service.getCriteria().isEmpty()) {
             // Direct subscription
-            availInternetService(serviceId);
+            Integer userId = authService.getCurrentUserDetails().getUserId();
+            availInternetService(userId, serviceId);
             return true;
         } else {
             // Create pending request
@@ -57,26 +58,25 @@ public class InternetServiceManager {
         }
     }
 
-    private void createPendingRequest(Integer serviceId) {
+    public void createPendingRequest(Integer serviceId) {
         PendingRequest request = new PendingRequest();
         User currentUser = authService.getCurrentUserDetails();
         request.setUserId(currentUser.getUserId());
         request.setServiceId(serviceId);
-        request.setServiceType(PendingRequestType.INTERNET_SERVICE);
+        request.setServiceType(PendingRequestServiceType.INTERNET_SERVICE);
         request.setRequestStatus(PendingRequestStatus.REQUESTED);
         request.setRemarks("Awaiting approval based on criteria: " + internetServiceRepo.findById(serviceId).get().getCriteria());
         request.setActive(true);
         pendingRequestRepo.save(request);
     }
 
-    private void availInternetService(Integer serviceId) {
+    public void availInternetService(Integer userId, Integer serviceId) {
         InternetServiceAvailed availed = new InternetServiceAvailed();
-        User currentUser = authService.getCurrentUserDetails();
-        availed.setUserId(currentUser.getUserId());
+        availed.setUserId(userId);
         availed.setServiceId(serviceId);
         availed.setStartDate(LocalDate.now());
         availed.setEndDate(LocalDate.now().plusMonths(1));
-        availed.setUser(currentUser);
+        availed.setUser(authService.getUserDetailsByUserId(userId));
         internetServiceAvailedRepo.save(availed);
     }
 

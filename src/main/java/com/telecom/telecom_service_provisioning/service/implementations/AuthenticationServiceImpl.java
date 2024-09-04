@@ -50,5 +50,10 @@ public class AuthenticationServiceImpl {
         UserDetails userDetails = getCurrentLoggedInUserDetails();
         Optional<User> optUser = userRepository.findByUsername(userDetails.getUsername());
         return optUser.get();
-    }    
+    }
+    
+    public User getUserDetailsByUserId(Integer userId) {
+        Optional<User> optUser = userRepository.findById(userId);
+        return optUser.get();
+    }
 }
