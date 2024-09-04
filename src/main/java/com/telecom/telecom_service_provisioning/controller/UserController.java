@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @GetMapping("/api/user-details")
-    public UserDetailsDto getCurrentUserDetails() {
+    public ResponseEntity<UserDetailsDto> getCurrentUserDetails() {
         return ResponseEntity.ok(userService.getUserDetails());
     }
     
