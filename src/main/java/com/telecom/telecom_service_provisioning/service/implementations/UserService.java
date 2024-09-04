@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
+import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
+import com.telecom.telecom_service_provisioning.model.User;
 
 @Service
 public class UserService {
@@ -40,6 +42,14 @@ public class UserService {
 
     public void deactivateTvService(Integer availedServiceId, LocalDate startDate)throws Exception{
         availedTvService.deactivateService(availedServiceId, startDate);
+    }
+
+    public UserDetailsDto getUserDetails() {
+        UserDetailsDto user = new UserDetailsDto();
+        User cur = authService.getCurrentUserDetails();
+        user.setEmail(cur.getEmail());
+        user.setUsername(cur.getUsername());
+        return user;
     }
     
 }
