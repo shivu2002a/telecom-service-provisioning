@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
+import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;
@@ -71,6 +72,12 @@ public class UserController {
         userService.deactivateTvService(availedServiceId, startDate);
         return ResponseEntity.ok("TV service deactivated successfully");
     }
+
+    @GetMapping("/api/user-details")
+    public UserDetailsDto getCurrentUserDetails() {
+        return ResponseEntity.ok(userService.getUserDetails());
+    }
+    
 
 
 
