@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
-import com.telecom.telecom_service_provisioning.constant.PendingRequestType;
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
@@ -46,7 +46,8 @@ public class TvServiceManager {
                             .orElseThrow(() -> new ResourceNotFoundException("Tv Service with id: " + serviceId + "doesn't exists !!"));
         if (service.getCriteria() == null || service.getCriteria().isEmpty()) {
             // Direct subscription
-            availTvService(serviceId);
+            Integer userId = authService.getCurrentUserDetails().getUserId();
+            availTvService(userId, serviceId);
             return true;
         } else {
             // Create pending request
@@ -60,20 +61,20 @@ public class TvServiceManager {
         User currentUser = authService.getCurrentUserDetails();
         request.setUserId(currentUser.getUserId());
         request.setServiceId(serviceId);
-        request.setServiceType(PendingRequestType.TV_SERVICE);
+        request.setServiceType(PendingRequestServiceType.TV_SERVICE);
         request.setRequestStatus(PendingRequestStatus.REQUESTED);
         request.setRemarks("Awaiting approval based on criteria: " + tvServiceRepo.findById(serviceId).get().getCriteria());
         request.setActive(true);
         pendingRequestRepo.save(request);
     }
 
-    private void availTvService(Integer serviceId) {
-        User currentUser = authService.getCurrentUserDetails();
+    public void availTvService(Integer userId, Integer serviceId) {
         TvServiceAvailed availed = new TvServiceAvailed();
-        availed.setUserId(currentUser.getUserId());
+        availed.setUserId(userId);
         availed.setServiceId(serviceId);
         availed.setStartDate(LocalDate.now());
         availed.setEndDate(LocalDate.now().plusMonths(1));
+        availed.setUser(authService.getUserDetailsByUserId(userId));
         tvServiceAvailedRepo.save(availed);
     }
 

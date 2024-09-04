@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
+import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
@@ -15,6 +17,12 @@ public class PendingRequestServiceImpl implements PendingRequestService {
 
     @Autowired
     private PendingRequestRepository pendingRequestsRepo;
+
+    @Autowired
+    private InternetServiceManager internetServiceManager;
+
+    @Autowired
+    private TvServiceManager tvServiceManager;
 
     public void createPendingRequest(PendingRequest pendingRequest) {
         pendingRequestsRepo.save(pendingRequest);
@@ -31,7 +39,16 @@ public class PendingRequestServiceImpl implements PendingRequestService {
         existingPendingRequest.setActive(false);
         existingPendingRequest.setRequestStatus(updatedpendingRequest.getRequestStatus());
         existingPendingRequest.setRemarks(updatedpendingRequest.getRemarks());
-        return pendingRequestsRepo.save(existingPendingRequest);
+        pendingRequestsRepo.save(existingPendingRequest);
+        if(updatedpendingRequest.getRequestStatus().equals(PendingRequestStatus.APPROVED)) {
+            if(updatedpendingRequest.getServiceType().equals(PendingRequestServiceType.INTERNET_SERVICE)) {
+                internetServiceManager.availInternetService(updatedpendingRequest.getUserId(), updatedpendingRequest.getServiceId());
+            }else {
+                tvServiceManager.availTvService(updatedpendingRequest.getUserId(), updatedpendingRequest.getServiceId());
+            }
+        }
+
+        return updatedpendingRequest;
     }    
 
 }
