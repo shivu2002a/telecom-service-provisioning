@@ -30,9 +30,9 @@ public class TvServiceAvailed {
     @Column(name = "EndDate")
     private LocalDate endDate;
 
-    @ManyToOne
-    @JoinColumn(name = "UserID", insertable = false, updatable = false)
-    private User user;
+    // @ManyToOne
+    // @JoinColumn(name = "UserID", insertable = false, updatable = false)
+    // private User user;
 
     @ManyToOne
     @JoinColumn(name = "ServiceID", insertable = false, updatable = false)

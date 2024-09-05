@@ -84,7 +84,7 @@ public class TvServiceManager {
         availed.setServiceId(serviceId);
         availed.setStartDate(LocalDate.now());
         availed.setEndDate(LocalDate.now().plusMonths(1));
-        availed.setUser(authService.getUserDetailsByUserId(userId));
+        // availed.setUser(authService.getUserDetailsByUserId(userId));
         availed.setActive(true);
         tvServiceAvailedRepo.save(availed);
     }

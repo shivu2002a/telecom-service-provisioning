@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.EmailAlreadyTakenException;
 import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
@@ -38,8 +40,17 @@ public class AuthController {
     
 
     @GetMapping("/checkLoggedInUser")
-    public ResponseEntity<User> getUserDetails() {
-        return new ResponseEntity<User>(authService.getCurrentUserDetails(), HttpStatus.OK);
+    public ResponseEntity<UserDetailsDto> getUserDetails() {
+        UserDetailsDto dto = new UserDetailsDto();
+        User user = authService.getCurrentUserDetails();
+        dto.setEmail(user.getEmail());
+        dto.setUsername(user.getUsername());
+        return new ResponseEntity<UserDetailsDto>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping("/userdetails")
+    public ResponseEntity<UserDetailsDto> getUserDetailsById(@RequestParam Integer userId) {
+        return new ResponseEntity<UserDetailsDto>(authService.getUserDetailsByUserId(userId), HttpStatus.OK);
     }
     
     @GetMapping("/home")
