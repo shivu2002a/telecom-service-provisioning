@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;

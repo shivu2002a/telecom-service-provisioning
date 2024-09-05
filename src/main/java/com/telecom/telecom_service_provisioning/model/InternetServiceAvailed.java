@@ -2,6 +2,7 @@ package com.telecom.telecom_service_provisioning.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.telecom.telecom_service_provisioning.model.compositekeyModels.InternetServicesAvailedId;
 
 import jakarta.persistence.Column;
@@ -36,9 +37,10 @@ public class InternetServiceAvailed {
     @Column(name = "EndDate")
     private LocalDate endDate;
 
-    @ManyToOne
-    @JoinColumn(name = "UserID", insertable = false, updatable = false)
-    private User user;
+    // @ManyToOne
+    // @JoinColumn(name = "UserID", insertable = false, updatable = false)
+    // @JsonProperty()
+    // private User user;
 
     @ManyToOne
     @JoinColumn(name = "ServiceID", insertable = false, updatable = false)

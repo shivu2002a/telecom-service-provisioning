@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.EmailAlreadyTakenException;
 import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.repository.UserRepository;
@@ -52,8 +53,11 @@ public class AuthenticationServiceImpl {
         return optUser.get();
     }
     
-    public User getUserDetailsByUserId(Integer userId) {
+    public UserDetailsDto getUserDetailsByUserId(Integer userId) {
         Optional<User> optUser = userRepository.findById(userId);
-        return optUser.get();
+        UserDetailsDto userDetailsDto = new UserDetailsDto();
+        userDetailsDto.setUsername(optUser.get().getUsername());
+        userDetailsDto.setEmail(optUser.get().getEmail());
+        return userDetailsDto;
     }
 }
