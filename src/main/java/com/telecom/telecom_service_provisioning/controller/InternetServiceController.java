@@ -39,14 +39,6 @@ public class InternetServiceController {
             return new ResponseEntity<>(internetService.getInternetServiceDetails(id), HttpStatus.OK);
     }
 
-    @PostMapping("/subscribe")
-    public ResponseEntity<String> subscribeToService(@RequestParam Integer serviceId) throws ResourceNotFoundException {
-        boolean availed = internetService.subscribeToService(serviceId);
-        if(availed) {
-            return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>("Requested for admins approval", HttpStatus.OK);
-        }
-    }
+    
     
 }

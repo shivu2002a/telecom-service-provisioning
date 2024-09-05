@@ -39,15 +39,5 @@ public class TvServiceController {
     public ResponseEntity<TvService> getTvServiceDetailsById(@PathVariable Integer id) throws ResourceNotFoundException {
         return new ResponseEntity<>(tvService.getTvServiceDetails(id), HttpStatus.OK);
     }
-    @PostMapping("/subscribe")
-    public ResponseEntity<String> subscribeToService(@RequestParam Integer serviceId) throws ResourceNotFoundException {
-        boolean availed = tvService.subscribeToTvService(serviceId);
-        if(availed) {
-            return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>("Requested for admins approval", HttpStatus.OK);
-        }
-    }
-    
-
+   
 }

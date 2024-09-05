@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
+import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;
@@ -39,6 +40,26 @@ public class UserController {
 
     @Autowired
     private TvServiceManager tvService;
+
+    @PostMapping("/api/internet-service/subscribe")
+    public ResponseEntity<String> subscribeToInternetService(@RequestParam Integer serviceId) throws ResourceNotFoundException {
+        boolean availed = internetService.subscribeToService(serviceId);
+        if(availed) {
+            return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Requested for admins approval", HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/api/tv-service/subscribe")
+    public ResponseEntity<String> subscribeToTvService(@RequestParam Integer serviceId) throws ResourceNotFoundException {
+        boolean availed = tvService.subscribeToTvService(serviceId);
+        if(availed) {
+            return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Requested for admins approval", HttpStatus.OK);
+        }
+    }
 
     @GetMapping("/api/subscribed-service")
     public ResponseEntity<AvailedServices> getSubscribedServices() {

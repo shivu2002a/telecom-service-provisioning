@@ -26,6 +26,9 @@ public class TvService {
     @Column(name = "criteria")
     private String criteria;
 
+    @Column(name = "serviceType", length = 50)
+    private String serviceType;
+
     @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
 
