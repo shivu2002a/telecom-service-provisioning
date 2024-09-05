@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.compositekeyModels.InternetServicesAvailedId;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -12,6 +14,8 @@ public interface InternetServiceAvailedRepository extends JpaRepository<Internet
     
     List<InternetServiceAvailed> findByUserIdAndActiveTrue(Integer userId);
 
-    
+    List<InternetServiceAvailed> findByEndDate(LocalDate endDate);
+
+    List<InternetServiceAvailed> findByUserId(Integer userId);
 
 }

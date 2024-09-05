@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ServiceAlreadyAvailedException;
+import com.telecom.telecom_service_provisioning.model.InternetService;
+import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
@@ -40,7 +43,7 @@ public class TvServiceManager {
         return tvServiceRepo.findById(id).get();
     }
 
-    public boolean subscribeToTvService(Integer serviceId) throws ResourceNotFoundException {
+    public boolean subscribeToTvService(Integer serviceId) throws Exception {
         TvService service = tvServiceRepo
                             .findById(serviceId)
                             .orElseThrow(() -> new ResourceNotFoundException("Tv Service with id: " + serviceId + "doesn't exists !!"));
@@ -68,7 +71,14 @@ public class TvServiceManager {
         pendingRequestRepo.save(request);
     }
 
-    public void availTvService(Integer userId, Integer serviceId) {
+    public void availTvService(Integer userId, Integer serviceId) throws Exception {
+        List<TvServiceAvailed> availedServices = tvServiceAvailedRepo.findByUserId(userId);
+        TvService toSubscribeService = tvServiceRepo.findById(serviceId).get();
+        for (TvServiceAvailed service : availedServices) {
+            if (service.getTvService().getServiceName().equals(toSubscribeService.getServiceName())) {
+                throw new ServiceAlreadyAvailedException("Tv service: " + toSubscribeService.getServiceName() + " already availed");
+            }
+        }
         TvServiceAvailed availed = new TvServiceAvailed();
         availed.setUserId(userId);
         availed.setServiceId(serviceId);
