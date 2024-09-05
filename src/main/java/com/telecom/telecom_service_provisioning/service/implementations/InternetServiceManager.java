@@ -77,10 +77,11 @@ public class InternetServiceManager {
         availed.setStartDate(LocalDate.now());
         availed.setEndDate(LocalDate.now().plusMonths(1));
         availed.setUser(authService.getUserDetailsByUserId(userId));
+        availed.setActive(true);
         internetServiceAvailedRepo.save(availed);
     }
 
     public List<InternetService> getInternetServicesForUpgradeDowngrade(String serviceName, String serviceType) {
-        return internetServiceRepo.findByActiveTrueAndServiceNameAndServiceTypeExcept(serviceName,serviceType);
+        return internetServiceRepo.findByActiveTrueAndServiceNameAndServiceTypeNot(serviceName,serviceType);
     }
 }

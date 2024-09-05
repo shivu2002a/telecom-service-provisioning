@@ -21,6 +21,7 @@ public class AdminServiceImpl {
     private TvServiceRepository tvServiceRepository;
 
     public InternetService createInternetService(InternetService internetService) {
+        internetService.setActive(true);
         return internetServiceRepo.save(internetService);
     }
 
@@ -58,6 +59,7 @@ public class AdminServiceImpl {
     }
 
     public TvService createTvService(TvService tvService) {
+        tvService.setActive(true);
         return tvServiceRepository.save(tvService);
     }
 
@@ -86,6 +88,7 @@ public class AdminServiceImpl {
         updatedService.setDescription(updates.getDescription());
         updatedService.setBenefits(updates.getBenefits());
         updatedService.setCriteria(updates.getCriteria());
+        updatedService.setServiceType(updates.getServiceType());
         updatedService.setMonthlyCost(updates.getMonthlyCost());
         updatedService.setActive(true);
         return tvServiceRepository.save(updatedService);

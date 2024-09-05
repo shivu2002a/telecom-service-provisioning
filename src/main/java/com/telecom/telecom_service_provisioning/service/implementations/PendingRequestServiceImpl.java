@@ -48,7 +48,7 @@ public class PendingRequestServiceImpl implements PendingRequestService {
             }
         }
 
-        return updatedpendingRequest;
+        return existingPendingRequest;
     }    
 
 }

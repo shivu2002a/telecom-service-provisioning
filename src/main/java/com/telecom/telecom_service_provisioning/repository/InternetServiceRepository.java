@@ -12,6 +12,6 @@ public interface InternetServiceRepository extends JpaRepository<InternetService
     
     List<InternetService> findByActiveTrue();
 
-    List<InternetService> findByActiveTrueAndServiceNameAndServiceTypeExcept(String serviceName, String serviceType);
+    List<InternetService> findByActiveTrueAndServiceNameAndServiceTypeNot(String serviceName, String serviceType);
 
 }

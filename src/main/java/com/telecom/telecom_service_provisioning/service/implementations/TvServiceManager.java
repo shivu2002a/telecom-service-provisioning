@@ -75,10 +75,11 @@ public class TvServiceManager {
         availed.setStartDate(LocalDate.now());
         availed.setEndDate(LocalDate.now().plusMonths(1));
         availed.setUser(authService.getUserDetailsByUserId(userId));
+        availed.setActive(true);
         tvServiceAvailedRepo.save(availed);
     }
 
     public List<TvService> getTvServicesForUpgradeDowngrade(String serviceName, String serviceType) {
-        return tvServiceRepo.findByActiveTrueAndServiceNameAndServiceTypeExcept(serviceName,serviceType);
+        return tvServiceRepo.findByActiveTrueAndServiceNameAndServiceTypeNot(serviceName,serviceType);
     }
 }

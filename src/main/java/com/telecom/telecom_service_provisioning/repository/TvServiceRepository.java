@@ -12,6 +12,6 @@ public interface TvServiceRepository extends JpaRepository<TvService, Integer> {
     
     List<TvService> findByActiveTrue();
     
-    List<TvService> findByActiveTrueAndServiceNameAndServiceTypeExcept(String serviceName, String serviceType);
+    List<TvService> findByActiveTrueAndServiceNameAndServiceTypeNot(String serviceName, String serviceType);
 
 } 
