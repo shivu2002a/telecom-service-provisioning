@@ -1,6 +1,7 @@
 package com.telecom.telecom_service_provisioning.service.implementations;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,10 @@ public class AvailedInternetServiceManager {
                 .orElseThrow(() -> new ResourceNotFoundException("AvailedInternetService with id " + intServiceId + "doesn't exists"));
         availedInternetService.setActive(false);
         internetServiceAvailedRepo.save(availedInternetService);
+    }
+
+    public List<InternetServiceAvailed> findByEndDate(LocalDate todayDate) {
+        return internetServiceAvailedRepo.findByEndDate(todayDate);
     }
     
 }

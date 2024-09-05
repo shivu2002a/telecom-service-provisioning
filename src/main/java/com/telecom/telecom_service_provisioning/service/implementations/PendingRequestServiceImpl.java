@@ -32,7 +32,7 @@ public class PendingRequestServiceImpl implements PendingRequestService {
         return pendingRequestsRepo.findAll();
     }
 
-    public PendingRequest updatePendingRequest(PendingRequest updatedpendingRequest) throws ResourceNotFoundException {
+    public PendingRequest updatePendingRequest(PendingRequest updatedpendingRequest) throws Exception {
         PendingRequest existingPendingRequest = pendingRequestsRepo
                                         .findById(updatedpendingRequest.getRequestId())
                                         .orElseThrow(() -> new ResourceNotFoundException("PendingRequest with id " + updatedpendingRequest.getRequestId() + "doesn't exists"));

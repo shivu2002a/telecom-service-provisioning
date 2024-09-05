@@ -94,7 +94,7 @@ public class AdminController {
     
 
     @PatchMapping("/api/approval-requests")
-    public ResponseEntity<PendingRequest> updatePendingRequest(@RequestBody PendingRequest pendingRequest) throws ResourceNotFoundException{
+    public ResponseEntity<PendingRequest> updatePendingRequest(@RequestBody PendingRequest pendingRequest) throws Exception {
         PendingRequest updaPendingRequest = pendingRequestService.updatePendingRequest(pendingRequest);
         return new ResponseEntity<>(updaPendingRequest, HttpStatus.OK);
     }

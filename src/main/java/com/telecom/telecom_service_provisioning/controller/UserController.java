@@ -42,7 +42,7 @@ public class UserController {
     private TvServiceManager tvService;
 
     @PostMapping("/api/internet-service/subscribe")
-    public ResponseEntity<String> subscribeToInternetService(@RequestParam Integer serviceId) throws ResourceNotFoundException {
+    public ResponseEntity<String> subscribeToInternetService(@RequestParam Integer serviceId) throws Exception {
         boolean availed = internetService.subscribeToService(serviceId);
         if(availed) {
             return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PostMapping("/api/tv-service/subscribe")
-    public ResponseEntity<String> subscribeToTvService(@RequestParam Integer serviceId) throws ResourceNotFoundException {
+    public ResponseEntity<String> subscribeToTvService(@RequestParam Integer serviceId) throws Exception {
         boolean availed = tvService.subscribeToTvService(serviceId);
         if(availed) {
             return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);

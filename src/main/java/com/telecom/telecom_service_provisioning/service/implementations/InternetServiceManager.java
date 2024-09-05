@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ServiceAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
@@ -42,7 +43,7 @@ public class InternetServiceManager {
                 .orElseThrow(() -> new ResourceNotFoundException("PendingRequest with id: " + id + " doesn't exists"));
     }
 
-    public boolean subscribeToService(Integer serviceId) throws ResourceNotFoundException {
+    public boolean subscribeToService(Integer serviceId) throws Exception {
         InternetService service = internetServiceRepo
                                     .findById(serviceId)
                                     .orElseThrow(() -> new ResourceNotFoundException("PendingRequest with id: " + serviceId + " doesn't exists"));
@@ -70,7 +71,16 @@ public class InternetServiceManager {
         pendingRequestRepo.save(request);
     }
 
-    public void availInternetService(Integer userId, Integer serviceId) {
+    public void availInternetService(Integer userId, Integer serviceId) throws Exception {
+        // If he has subscribed to same service but different stype (Standard, basic, premium)
+        // This avail should be enabled from end of the exisiting one
+        List<InternetServiceAvailed> availedServices = internetServiceAvailedRepo.findByUserId(userId);
+        InternetService toSubscribeService = internetServiceRepo.findById(serviceId).get();
+        for (InternetServiceAvailed service : availedServices) {
+            if (service.getInternetService().getServiceName().equals(toSubscribeService.getServiceName())) {
+                throw new ServiceAlreadyAvailedException("Internet service: " + toSubscribeService.getServiceName() + " already availed");
+            }
+        }
         InternetServiceAvailed availed = new InternetServiceAvailed();
         availed.setUserId(userId);
         availed.setServiceId(serviceId);
