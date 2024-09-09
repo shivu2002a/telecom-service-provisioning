@@ -13,8 +13,11 @@ import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
 @EnableScheduling
+@Slf4j
 public class DisableSubscribedServices {
     
     @Autowired
@@ -25,6 +28,7 @@ public class DisableSubscribedServices {
 
     @Scheduled(cron = "0 0 0 * * ?")
     private void disableAvailedInternetServices(){
+        LOGGER.info("DisableAvailedInternetServices called from: {}", this.getClass().getName());;
         List<InternetServiceAvailed> internetServices = internetServiceAvailedRepo.findByEndDate(LocalDate.now());
         if(internetServices == null) return;
         for (InternetServiceAvailed internetServiceAvailed : internetServices) {
@@ -35,6 +39,7 @@ public class DisableSubscribedServices {
 
     @Scheduled(cron = "0 0 0 * * ?")
     private void disableAvailedTvServices(){
+        LOGGER.info("DisableAvailedTvServices called from: {}", this.getClass().getName());;
         List<TvServiceAvailed> tvServices = tvServiceAvailedRepo.findByEndDate(LocalDate.now());
         if(tvServices == null) return;
         for (TvServiceAvailed tvServiceAvailed : tvServices) {

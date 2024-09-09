@@ -2,7 +2,7 @@ package com.telecom.telecom_service_provisioning.model;
 
 import java.time.LocalDate;
 
-import com.telecom.telecom_service_provisioning.model.compositekeyModels.TvServicesAvailedId;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServicesAvailedId;
 
 import jakarta.persistence.*;
 import lombok.Data;

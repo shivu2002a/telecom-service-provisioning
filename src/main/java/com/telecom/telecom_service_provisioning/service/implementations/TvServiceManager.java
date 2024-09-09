@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ServiceAlreadyAvailedException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ServiceAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;

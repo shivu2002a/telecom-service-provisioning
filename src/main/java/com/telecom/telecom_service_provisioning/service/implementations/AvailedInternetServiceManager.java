@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
-import com.telecom.telecom_service_provisioning.model.compositekeyModels.InternetServicesAvailedId;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.InternetServicesAvailedId;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 
 @Service

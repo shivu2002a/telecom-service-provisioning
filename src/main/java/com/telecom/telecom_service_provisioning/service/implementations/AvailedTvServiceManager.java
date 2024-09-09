@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
-import com.telecom.telecom_service_provisioning.model.compositekeyModels.TvServicesAvailedId;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServicesAvailedId;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 
 @Service

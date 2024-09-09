@@ -1,13 +1,20 @@
 package com.telecom.telecom_service_provisioning.service.implementations;
+import com.telecom.telecom_service_provisioning.dto.MostAvailedServicesDto;
+import com.telecom.telecom_service_provisioning.dto.MostAvailedServicesDto;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
+import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.TvService;
+import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceRepository;
+import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceRepository;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +26,12 @@ public class AdminServiceImpl {
 
     @Autowired
     private TvServiceRepository tvServiceRepository;
+
+    @Autowired
+    private InternetServiceAvailedRepository internetServiceAvailedRepo;
+
+    @Autowired
+    private TvServiceAvailedRepository tvServiceAvailedRepo;
 
     public InternetService createInternetService(InternetService internetService) {
         internetService.setActive(true);
@@ -92,6 +105,40 @@ public class AdminServiceImpl {
         updatedService.setMonthlyCost(updates.getMonthlyCost());
         updatedService.setActive(true);
         return tvServiceRepository.save(updatedService);
+    }
+
+    public List<MostAvailedServicesDto> getMostAvailedInternetService() {
+        List<Object[]> availedServices = internetServiceAvailedRepo.findServiceIdAndCount();
+        List<MostAvailedServicesDto> res = new ArrayList<>();
+        for (Object[] result : availedServices) {
+            Integer serviceId = Integer.parseInt(result[0]+"");
+            Integer count = Integer.parseInt(result[1]+"");
+            MostAvailedServicesDto dto = new MostAvailedServicesDto();
+            InternetService internetService = internetServiceRepo.findById(serviceId).get();
+            dto.setServiceId(serviceId);
+            dto.setServiceName(internetService.getServiceName());
+            dto.setServiceType(internetService.getServiceType());
+            dto.setSubscribedCount(count);
+            res.add(dto);
+        }
+        return res;
+    }
+
+    public List<MostAvailedServicesDto> getMostAvailedTvService() {
+        List<Object[]> availedServices = tvServiceAvailedRepo.findServiceIdAndCount();
+        List<MostAvailedServicesDto> res = new ArrayList<>();
+        for (Object[] result : availedServices) {
+            Integer serviceId = Integer.parseInt(result[0]+"");
+            Integer count = Integer.parseInt(result[1]+"");
+            MostAvailedServicesDto dto = new MostAvailedServicesDto();
+            TvService tvService = tvServiceRepository.findById(serviceId).get();
+            dto.setServiceId(serviceId);
+            dto.setServiceName(tvService.getServiceName());
+            dto.setServiceType(tvService.getServiceType());
+            dto.setSubscribedCount(count);
+            res.add(dto);
+        }
+        return res;
     }
 
 }

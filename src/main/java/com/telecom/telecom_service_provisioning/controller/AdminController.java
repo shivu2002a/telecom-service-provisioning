@@ -7,17 +7,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.dto.MostAvailedServicesDto;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.service.implementations.AdminServiceImpl;
 import com.telecom.telecom_service_provisioning.service.implementations.PendingRequestServiceImpl;
 
+import lombok.extern.slf4j.Slf4j;
+
+
 
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin
+@Slf4j
 public class AdminController {
     
     // Create a service
@@ -26,6 +31,8 @@ public class AdminController {
     // Delete a service
     // Read pending requests
     // Update pending requests
+    // Get most subscribed tv services
+    // Get most subscribed internet services
 
     @Autowired
     private PendingRequestServiceImpl pendingRequestService;
@@ -102,6 +109,17 @@ public class AdminController {
 
     @GetMapping("/api/approval-requests")
     public ResponseEntity<List<PendingRequest>> getAllPendingRequests(){
+        LOGGER.info("PendingRequestsController: Calling getAllpendingRequests service");
         return new ResponseEntity<>(pendingRequestService.getAllPendingRequest(), HttpStatus.OK);
+    }
+
+    @GetMapping("/api/availed-internet-services")
+    public ResponseEntity<List<MostAvailedServicesDto>> mostAvailedInternetServices() {
+        return ResponseEntity.ok(adminService.getMostAvailedInternetService());
+    }
+
+    @GetMapping("/api/most-availed-tv-services")
+    public ResponseEntity<List<MostAvailedServicesDto>> mostAvailedTvServices() {
+        return ResponseEntity.ok(adminService.getMostAvailedTvService());
     }
 }

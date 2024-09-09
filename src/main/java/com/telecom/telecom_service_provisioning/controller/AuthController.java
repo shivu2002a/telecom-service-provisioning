@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.EmailAlreadyTakenException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.EmailAlreadyTakenException;
 import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
 
@@ -45,6 +45,7 @@ public class AuthController {
         User user = authService.getCurrentUserDetails();
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
+        dto.setUserRole(user.getRole());
         return new ResponseEntity<UserDetailsDto>(dto, HttpStatus.OK);
     }
 

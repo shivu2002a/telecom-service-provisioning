@@ -3,7 +3,7 @@ package com.telecom.telecom_service_provisioning.model;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.telecom.telecom_service_provisioning.model.compositekeyModels.InternetServicesAvailedId;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.InternetServicesAvailedId;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
