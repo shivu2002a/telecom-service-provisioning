@@ -2,11 +2,9 @@
 -- Table to store user information
 CREATE TABLE Users (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
+    userName VARCHAR(50) NOT NULL,
     Email VARCHAR(100) UNIQUE NOT NULL,
     Password varchar(50),
-    phoneno varchar(10),
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -65,6 +63,5 @@ CREATE TABLE PendingRequests (
     reuestStatus VARCHAR(15),
     remarks VARCHAR(100),
     active boolean
-
 )
 

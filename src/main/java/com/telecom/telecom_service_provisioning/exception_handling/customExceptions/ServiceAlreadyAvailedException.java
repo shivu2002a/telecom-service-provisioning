@@ -1,4 +1,4 @@
-package com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions;
+package com.telecom.telecom_service_provisioning.exception_handling.customExceptions;
 
 public class ServiceAlreadyAvailedException extends Exception {
     

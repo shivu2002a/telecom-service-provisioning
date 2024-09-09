@@ -1,5 +1,6 @@
 package com.telecom.telecom_service_provisioning.service.implementations;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
+import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.User;
+import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
 
 @Service
 public class UserService {
@@ -21,6 +24,9 @@ public class UserService {
 
     @Autowired
     private AvailedTvServiceManager availedTvService;
+
+    @Autowired
+    private PendingRequestRepository pendingRequestRepo;
 
     public AvailedServices getAllSubscribedServices() {
         Integer userId = authService.getCurrentUserDetails().getUserId();
@@ -49,7 +55,13 @@ public class UserService {
         User cur = authService.getCurrentUserDetails();
         user.setEmail(cur.getEmail());
         user.setUsername(cur.getUsername());
+        user.setUserRole(cur.getRole());
         return user;
+    }
+
+    public List<PendingRequest> getAllPendingRequests() {
+        Integer userId = authService.getCurrentUserDetails().getUserId();
+        return pendingRequestRepo.findByUserId(userId);
     }
     
 }

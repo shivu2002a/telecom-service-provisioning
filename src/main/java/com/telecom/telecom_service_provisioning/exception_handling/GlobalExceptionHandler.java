@@ -1,15 +1,16 @@
-package com.telecom.telecom_service_provisioning.exceptionHandling;
+package com.telecom.telecom_service_provisioning.exception_handling;
 
 import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+// import com.telecom.telecom_service_provisioning.exception_handling.ErrorResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.EmailAlreadyTakenException;
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ResourceNotFoundException;
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.ServiceAlreadyAvailedException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.EmailAlreadyTakenException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ServiceAlreadyAvailedException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

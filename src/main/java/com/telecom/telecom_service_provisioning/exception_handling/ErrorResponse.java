@@ -1,4 +1,4 @@
-package com.telecom.telecom_service_provisioning.exceptionHandling;
+package com.telecom.telecom_service_provisioning.exception_handling;
 
 import java.time.LocalDateTime;
 

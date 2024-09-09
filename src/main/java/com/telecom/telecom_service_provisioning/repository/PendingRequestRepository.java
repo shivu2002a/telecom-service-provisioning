@@ -9,5 +9,9 @@ import com.telecom.telecom_service_provisioning.model.PendingRequest;
 
 @Repository
 public interface PendingRequestRepository extends JpaRepository<PendingRequest, Integer>{
+    
     List<PendingRequest> findByActiveTrue();
+
+    List<PendingRequest> findByUserId(Integer userId);
+    
 }

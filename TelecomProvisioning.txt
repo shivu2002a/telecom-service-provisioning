@@ -123,4 +123,12 @@ CREATE TABLE InternetServicesAvailed (
     FOREIGN KEY (ServiceID) REFERENCES InternetServices(ServiceID)
 );
 
-CREATE TABLE pendingrequests 
+CREATE TABLE pendingrequests (
+
+);
+
+✅ Pending requests of user 
+
+Phno in reg,
+validity num of days in each service
+Stats apis

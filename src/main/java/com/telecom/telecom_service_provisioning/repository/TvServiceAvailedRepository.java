@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
-import com.telecom.telecom_service_provisioning.model.compositekeyModels.TvServicesAvailedId;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServicesAvailedId;
 
 /**
  * TvServiceAvailedRepository
@@ -20,5 +21,8 @@ public interface TvServiceAvailedRepository extends JpaRepository<TvServiceAvail
     List<TvServiceAvailed> findByEndDate(LocalDate todayDate);
 
     List<TvServiceAvailed> findByUserId(Integer userId);
+
+     @Query(value = "SELECT ServiceID, COUNT(ServiceID) AS count FROM Tv_Services_Availed GROUP BY ServiceID", nativeQuery = true)
+    List<Object[]> findServiceIdAndCount();
 
 }

@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
-import com.telecom.telecom_service_provisioning.exceptionHandling.CustomExceptions.EmailAlreadyTakenException;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.EmailAlreadyTakenException;
 import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.repository.UserRepository;
 

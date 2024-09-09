@@ -2,7 +2,6 @@
 The following was discovered as part of building this project:
 
 * The original package name 'com.telecom.telecom-service-provisioning' is invalid and this project uses 'com.telecom.telecom_service_provisioning' instead.
-
 # Getting Started
 
 ### Reference Documentation
