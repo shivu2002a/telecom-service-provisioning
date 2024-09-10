@@ -1,7 +1,7 @@
 services:
   mysql-db:
     image: mysql:8.0
-    container_name: mysql-database
+    container_name: mysql-database-telcoservice
     environment:
       MYSQL_ROOT_PASSWORD: localhost
       MYSQL_DATABASE: telcoservice
@@ -14,7 +14,7 @@ services:
 
   spring-app:
     image: telcoservice
-    container_name: telcoservice-container
+    container_name: telcoservice-app-container
     depends_on:
       - mysql-db
     environment:
