@@ -8,15 +8,15 @@ services:
       MYSQL_ROOT_PASSWORD: localhost
       MYSQL_DATABASE: telcoservice
     ports:
-      - "3307:3306"
+      - "10000:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
       - app-network
 
   spring-app:
-    image: your-spring-boot-app-image
-    container_name: spring-app
+    image: telcoservice
+    container_name: telcoservice-container
     depends_on:
       - mysql-db
     environment:
