@@ -50,16 +50,7 @@ pipeline {
         }
         stage("8. Run the docker compose") {
             steps {
-                script {
-                    if (fileExists('docker-compose.yml')) {
-                        bat """
-                        docker-compose down   // Stops any previous running services
-                        docker-compose up -d  // Runs the services in detached mode
-                        """
-                    } else {
-                        error "docker-compose.yml not found!"
-                    }
-                }
+                bat "docker compose up -d"
             }
         }
 
