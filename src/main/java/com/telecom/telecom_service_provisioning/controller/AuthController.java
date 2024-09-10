@@ -18,7 +18,6 @@ import com.telecom.telecom_service_provisioning.service.implementations.Authenti
 
 @RestController
 @CrossOrigin
-// @RequestMapping("/auth")
 public class AuthController {
     
     //Sign up
@@ -46,6 +45,7 @@ public class AuthController {
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
         dto.setUserRole(user.getRole());
+        dto.setPhonenumber(user.getPhonenumber());
         return new ResponseEntity<UserDetailsDto>(dto, HttpStatus.OK);
     }
 

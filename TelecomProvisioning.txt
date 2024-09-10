@@ -124,11 +124,17 @@ CREATE TABLE InternetServicesAvailed (
 );
 
 CREATE TABLE pendingrequests (
-
+    id int,
+    servicetype varchar(20),
+    createdAt TIMESTAMP,
+    userId int,
+    serviceid int
 );
 
 ✅ Pending requests of user 
 
-Phno in reg,
-validity num of days in each service
-Stats apis
+✅ Phno in reg,
+-- validity num of days in each service
+-- metric for Admin
+-- number of services availed by user
+

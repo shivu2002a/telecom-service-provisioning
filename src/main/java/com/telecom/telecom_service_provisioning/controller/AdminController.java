@@ -81,12 +81,14 @@ public class AdminController {
     //Get all active Tv Services
     @GetMapping("/api/tv-service")
     public ResponseEntity<List<TvService>> getAllTvServices() {
+        LOGGER.info("Retrieving all the tv services");
         return new ResponseEntity<>(adminService.getAllTvServices(), HttpStatus.OK);
     }
 
     //Update Tv Service
     @PatchMapping("/api/tv-service")
     public ResponseEntity<TvService> updateTvServices(@RequestBody TvService updates) {
+        LOGGER.info("Update tv service: Updating tv service: {}", updates);
         TvService updatedTvService = adminService.updateTvService(updates);
         return new ResponseEntity<>(updatedTvService, HttpStatus.CREATED);
     }
@@ -95,6 +97,7 @@ public class AdminController {
     //Terminate Tv Services
     @DeleteMapping("/api/tv-service")
     public ResponseEntity<String> terminateTvServices(@RequestParam Integer id) throws ResourceNotFoundException {
+        LOGGER.info("Terminating the tv service");
         adminService.terminateTvService(id);
         return new ResponseEntity<>("Terminated Successfully", HttpStatus.OK);
     }
@@ -102,24 +105,26 @@ public class AdminController {
 
     @PatchMapping("/api/approval-requests")
     public ResponseEntity<PendingRequest> updatePendingRequest(@RequestBody PendingRequest pendingRequest) throws Exception {
+        LOGGER.info("Updating pending request");
         PendingRequest updaPendingRequest = pendingRequestService.updatePendingRequest(pendingRequest);
         return new ResponseEntity<>(updaPendingRequest, HttpStatus.OK);
     }
 
-
     @GetMapping("/api/approval-requests")
     public ResponseEntity<List<PendingRequest>> getAllPendingRequests(){
-        LOGGER.info("PendingRequestsController: Calling getAllpendingRequests service");
+        LOGGER.info("Calling getAllpendingRequests service");
         return new ResponseEntity<>(pendingRequestService.getAllPendingRequest(), HttpStatus.OK);
     }
 
     @GetMapping("/api/availed-internet-services")
     public ResponseEntity<List<MostAvailedServicesDto>> mostAvailedInternetServices() {
+        LOGGER.info("Retrieving most availed internet services");
         return ResponseEntity.ok(adminService.getMostAvailedInternetService());
     }
 
     @GetMapping("/api/most-availed-tv-services")
     public ResponseEntity<List<MostAvailedServicesDto>> mostAvailedTvServices() {
+        LOGGER.info("Retrieving most availed tv services");
         return ResponseEntity.ok(adminService.getMostAvailedTvService());
     }
 }

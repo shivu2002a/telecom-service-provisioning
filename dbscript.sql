@@ -28,6 +28,7 @@ CREATE TABLE TvServices (
     ServiceName VARCHAR(100) NOT NULL,
     Description TEXT,
     benefits text,
+    serviceType text,
     criteria text,
     active boolean,
     MonthlyCost DECIMAL(10, 2)

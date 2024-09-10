@@ -22,7 +22,7 @@ public interface TvServiceAvailedRepository extends JpaRepository<TvServiceAvail
 
     List<TvServiceAvailed> findByUserId(Integer userId);
 
-     @Query(value = "SELECT ServiceID, COUNT(ServiceID) AS count FROM Tv_Services_Availed GROUP BY ServiceID", nativeQuery = true)
+     @Query(value = "SELECT ServiceID, COUNT(ServiceID) AS count FROM Tv_Services_Availed GROUP BY ServiceID ORDER BY count LIMIT 5", nativeQuery = true)
     List<Object[]> findServiceIdAndCount();
 
 }
