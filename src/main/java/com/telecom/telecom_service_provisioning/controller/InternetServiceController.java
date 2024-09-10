@@ -15,9 +15,12 @@ import com.telecom.telecom_service_provisioning.exception_handling.customExcepti
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/internet-services")
+@Slf4j
 public class InternetServiceController {
     
     //Get all Services
@@ -28,6 +31,7 @@ public class InternetServiceController {
 
     @GetMapping("/")
     public ResponseEntity<List<InternetService>> getAllInternetServices() {
+        LOGGER.info("Getting all internet services");
         return new ResponseEntity<>(internetService.getAllInternetService(), HttpStatus.OK);
     }
 

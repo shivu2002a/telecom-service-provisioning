@@ -38,5 +38,26 @@ pipeline {
                 bat "mvn spring-boot:run"
             }
         }
+        stage("7. Build the docker image") {
+            steps {
+                bat "docker build -t telcoservice ."
+            }
+        }
+        
+        stage("8. Run the docker compose") {
+            steps {
+                script {
+                    if (fileExists('docker-compose.yml')) {
+                        bat """
+                        docker-compose down   // Stops any previous running services
+                        docker-compose up -d  // Runs the services in detached mode
+                        """
+                    } else {
+                        error "docker-compose.yml not found!"
+                    }
+                }
+            }
+        }
+
     }
 }

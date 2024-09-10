@@ -28,7 +28,7 @@ public class AdminUserInitializer implements CommandLineRunner {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;  // Use Spring Security's password encoder
+    private PasswordEncoder passwordEncoder; 
 
     @Override
     public void run(String... args) throws Exception {

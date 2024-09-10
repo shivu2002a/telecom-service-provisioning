@@ -58,6 +58,7 @@ public class AuthenticationServiceImpl {
         UserDetailsDto userDetailsDto = new UserDetailsDto();
         userDetailsDto.setUsername(optUser.get().getUsername());
         userDetailsDto.setEmail(optUser.get().getEmail());
+        userDetailsDto.setPhonenumber(optUser.get().getPhonenumber());
         return userDetailsDto;
     }
 }

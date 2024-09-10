@@ -7,4 +7,5 @@ public class UserDetailsDto {
     private String username;
     private String email;
     private String userRole;
+    private String phonenumber;
 }
