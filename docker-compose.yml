@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   mysql-db:
     image: mysql:8.0
-    container_name: mysql-db
+    container_name: mysql-database
     environment:
       MYSQL_ROOT_PASSWORD: localhost
       MYSQL_DATABASE: telcoservice
@@ -20,7 +18,7 @@ services:
     depends_on:
       - mysql-db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/telcoservice?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/telcoservice?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: localhost
     ports:

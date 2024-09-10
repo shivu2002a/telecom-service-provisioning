@@ -23,6 +23,9 @@ public class AdminUserInitializer implements CommandLineRunner {
 
     @Value("${admin.user.email}")
     private String adminEmail;
+
+    @Value("${admin.user.phonenumber}")
+    private String adminPhonenumber;
     
     @Autowired
     private UserRepository userRepository;
@@ -38,6 +41,7 @@ public class AdminUserInitializer implements CommandLineRunner {
             User adminUser = new User();
             adminUser.setUsername(adminUsername);
             adminUser.setEmail(adminEmail);
+            adminUser.setPhonenumber(adminPhonenumber);
             adminUser.setPassword(passwordEncoder.encode(adminPassword));  // Store encoded password
             adminUser.setRole("ROLE_ADMIN");
             userRepository.save(adminUser);
