@@ -33,12 +33,12 @@ pipeline {
                 bat "mvn test"
             }
         }
-        stage("7. Build the docker image") {
+        stage("6. Build the docker image") {
             steps {
                 bat "docker build -t telcoservice ."
             }
         }
-        stage("8. Run the docker compose") {
+        stage("7. Run the docker compose") {
             steps {
                 bat "docker rm mysql-man"
                 bat "docker compose up -d"
