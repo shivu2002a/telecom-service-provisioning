@@ -1,5 +1,8 @@
 package com.telecom.telecom_service_provisioning.model;
 import java.io.Serializable;
+import java.sql.Timestamp;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
@@ -38,4 +41,8 @@ public class PendingRequest implements Serializable {
 
     @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
+
+    @Column(name = "CreatedAt", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Timestamp createdAt;
 }

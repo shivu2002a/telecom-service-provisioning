@@ -10,15 +10,20 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
+import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.model.InternetService;
+import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
+import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;
 import com.telecom.telecom_service_provisioning.service.implementations.TvServiceManager;
 import com.telecom.telecom_service_provisioning.service.implementations.UserService;
@@ -92,6 +97,20 @@ public class UserController {
         return new ResponseEntity<>(existingServicesForModification, HttpStatus.OK);
     }
 
+    @PutMapping("/api/internet-service")
+    public ResponseEntity<InternetServiceAvailed> upgradeDowngradeInternetSubcription(@RequestBody ModifySubscription modifySubscription) {
+        LOGGER.info("Modifying availed internet service.");
+        InternetServiceAvailed modification = internetService.modifySubscription(modifySubscription);
+        return new ResponseEntity<>(modification, HttpStatus.OK);
+    }
+
+    @PutMapping("/api/tv-service")
+    public ResponseEntity<TvServiceAvailed> upgradeDowngradeTvSubcription(@RequestBody ModifySubscription modifySubscription) {
+        LOGGER.info("Modifying availed tv service");
+        TvServiceAvailed modification = tvService.modifySubscription(modifySubscription);
+        return new ResponseEntity<>(modification, HttpStatus.OK);
+    }
+
     @DeleteMapping("/api/internet-service")
     public ResponseEntity<String> deactivateInternetService(@RequestParam Integer availedServiceId, @RequestParam LocalDate startDate) throws Exception {
         LOGGER.info("Deactivating internet service with id: {}", availedServiceId);
@@ -117,5 +136,18 @@ public class UserController {
         LOGGER.info("Retrieving user details");
         return ResponseEntity.ok(userService.getAllPendingRequests());
     }
-    
+
+    @PostMapping("/api/internet-service/feedback")
+    public ResponseEntity<String> postInternetServiceFeedback(@RequestParam Integer availedServiceId, @RequestParam String feedback) throws Exception {
+        LOGGER.info("Creating feedback");
+        userService.createInternetServiceFeedback(availedServiceId, feedback);
+        return ResponseEntity.ok("Internet service feedback created successfully");
+    }
+
+    @PostMapping("/api/tv-service/feedback")
+    public ResponseEntity<String> postTvServiceFeedback(@RequestParam Integer availedServiceId, @RequestParam String feedback) throws Exception {
+        LOGGER.info("Creating feedback");
+        userService.createTvServiceFeedback(availedServiceId, feedback);
+        return ResponseEntity.ok("Tv service Feedback created successfully");
+    }
 }

@@ -1,6 +1,10 @@
 package com.telecom.telecom_service_provisioning.model;
 
 import java.time.LocalDate;
+import java.sql.Timestamp;
+
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServicesAvailedId;
 
@@ -40,4 +44,8 @@ public class TvServiceAvailed {
 
     @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
+
+    @Column(name = "CreatedAt", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Timestamp createdAt;
 }

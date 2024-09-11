@@ -33,16 +33,6 @@ pipeline {
                 bat "mvn test"
             }
         }
-        // stage("6. Run the jar") {
-        //     steps {
-        //         bat "mvn spring-boot:run"
-        //     }
-        // }
-        // stage("7. Stop the running jar") {
-        //     steps {
-        //         bat "mvn spring-boot:stop"
-        //     }
-        // }
         stage("7. Build the docker image") {
             steps {
                 bat "docker build -t telcoservice ."
@@ -50,6 +40,7 @@ pipeline {
         }
         stage("8. Run the docker compose") {
             steps {
+                bat "docker rm mysql-man"
                 bat "docker compose up -d"
             }
         }

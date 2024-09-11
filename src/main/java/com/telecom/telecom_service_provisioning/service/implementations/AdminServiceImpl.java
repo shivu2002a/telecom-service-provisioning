@@ -1,22 +1,20 @@
 package com.telecom.telecom_service_provisioning.service.implementations;
-import com.telecom.telecom_service_provisioning.dto.MostAvailedServicesDto;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.telecom.telecom_service_provisioning.dto.FeedbackDto;
 import com.telecom.telecom_service_provisioning.dto.MostAvailedServicesDto;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
-import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceRepository;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AdminServiceImpl {
@@ -32,6 +30,9 @@ public class AdminServiceImpl {
 
     @Autowired
     private TvServiceAvailedRepository tvServiceAvailedRepo;
+
+    @Autowired
+    private FeedbackService feedbackService;
 
     public InternetService createInternetService(InternetService internetService) {
         internetService.setActive(true);
@@ -66,7 +67,8 @@ public class AdminServiceImpl {
         updatedService.setServiceUploadSpeed(updates.getServiceUploadSpeed());
         updatedService.setBenefits(updates.getBenefits());
         updatedService.setCriteria(updates.getCriteria());
-        updatedService.setMonthlyCost(updates.getMonthlyCost());
+        updatedService.setCost(updates.getCost());
+        updatedService.setValidity(updates.getValidity());
         updatedService.setActive(true);
         return internetServiceRepo.save(updatedService);
     }
@@ -102,7 +104,8 @@ public class AdminServiceImpl {
         updatedService.setBenefits(updates.getBenefits());
         updatedService.setCriteria(updates.getCriteria());
         updatedService.setServiceType(updates.getServiceType());
-        updatedService.setMonthlyCost(updates.getMonthlyCost());
+        updatedService.setCost(updates.getCost());
+        updatedService.setValidity(updates.getValidity());
         updatedService.setActive(true);
         return tvServiceRepository.save(updatedService);
     }
@@ -139,6 +142,10 @@ public class AdminServiceImpl {
             res.add(dto);
         }
         return res;
+    }
+
+    public FeedbackDto getAllFeedbacks() {
+        return feedbackService.getAllFeedbacks();
     }
 
 }

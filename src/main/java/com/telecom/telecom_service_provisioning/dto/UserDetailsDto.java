@@ -8,4 +8,5 @@ public class UserDetailsDto {
     private String email;
     private String userRole;
     private String phonenumber;
+    private String address;
 }

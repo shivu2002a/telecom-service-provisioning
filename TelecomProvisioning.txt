@@ -132,9 +132,11 @@ CREATE TABLE pendingrequests (
 );
 
 ✅ Pending requests of user 
-
 ✅ Phno in reg,
--- validity num of days in each service
--- metric for Admin
--- number of services availed by user
+✅ validity num of days in each service
+✅ metric for Admin
+✅ Feedback
+✅ number of services availed by user
 
+Update upgrading, downgrading, subscribe, terminate as for the Q
+Address in UserModel

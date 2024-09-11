@@ -38,7 +38,7 @@ public class DisableSubscribedServices {
     }
 
     @Scheduled(cron = "0 0 0 * * ?")
-    private void disableAvailedTvServices(){
+    private void disableAvailedTvServices() {
         LOGGER.info("DisableAvailedTvServices called from: {}", this.getClass().getName());;
         List<TvServiceAvailed> tvServices = tvServiceAvailedRepo.findByEndDate(LocalDate.now());
         if(tvServices == null) return;

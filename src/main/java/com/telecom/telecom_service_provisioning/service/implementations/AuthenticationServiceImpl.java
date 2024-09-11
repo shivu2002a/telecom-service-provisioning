@@ -59,6 +59,7 @@ public class AuthenticationServiceImpl {
         userDetailsDto.setUsername(optUser.get().getUsername());
         userDetailsDto.setEmail(optUser.get().getEmail());
         userDetailsDto.setPhonenumber(optUser.get().getPhonenumber());
+        userDetailsDto.setAddress(optUser.get().getAddress());
         return userDetailsDto;
     }
 }

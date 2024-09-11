@@ -39,6 +39,9 @@ public class User implements UserDetails {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @Column(name = "address", nullable = false)
+    private String address;
+
     @Column(name = "password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) 
     private String password;
