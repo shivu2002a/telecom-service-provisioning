@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
+import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.MaxServicesAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
-import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ServiceAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
@@ -46,10 +47,10 @@ public class InternetServiceManager {
     public boolean subscribeToService(Integer serviceId) throws Exception {
         InternetService service = internetServiceRepo
                                     .findById(serviceId)
-                                    .orElseThrow(() -> new ResourceNotFoundException("PendingRequest with id: " + serviceId + " doesn't exists"));
+                                    .orElseThrow(() -> new ResourceNotFoundException("Service with id: " + serviceId + " doesn't exists"));
+        Integer userId = authService.getCurrentUserDetails().getUserId();
         if (service.getCriteria() == null || service.getCriteria().isEmpty()) {
             // Direct subscription
-            Integer userId = authService.getCurrentUserDetails().getUserId();
             availInternetService(userId, serviceId);
             return true;
         } else {
@@ -72,26 +73,40 @@ public class InternetServiceManager {
     }
 
     public void availInternetService(Integer userId, Integer serviceId) throws Exception {
-        // If he has subscribed to same service but different stype (Standard, basic, premium)
-        // This avail should be enabled from end of the exisiting one
-        List<InternetServiceAvailed> availedServices = internetServiceAvailedRepo.findByUserId(userId);
         InternetService toSubscribeService = internetServiceRepo.findById(serviceId).get();
-        for (InternetServiceAvailed service : availedServices) {
-            if (service.getInternetService().getServiceName().equals(toSubscribeService.getServiceName())) {
-                throw new ServiceAlreadyAvailedException("Internet service: " + toSubscribeService.getServiceName() + " already availed");
-            }
+        List<InternetServiceAvailed> currentservices = internetServiceAvailedRepo.findByUserIdAndActiveTrue(userId);
+        int availedServices = currentservices.size(); 
+        int pendingRequests = pendingRequestRepo.findByUserIdAndServiceTypeAndActiveTrue(userId, PendingRequestServiceType.INTERNET_SERVICE).size();
+        if( pendingRequests + availedServices >= 2) {
+            throw new MaxServicesAlreadyAvailedException("Already availed/requested 2 Internet services");
         }
         InternetServiceAvailed availed = new InternetServiceAvailed();
         availed.setUserId(userId);
         availed.setServiceId(serviceId);
-        availed.setStartDate(LocalDate.now());
-        availed.setEndDate(LocalDate.now().plusMonths(1));
-        // availed.setUser(authService.getUserDetailsByUserId(userId));
+        availed.setInternetService(internetServiceRepo.findById(serviceId).get());
+        if(availedServices == 0) {
+            availed.setStartDate(LocalDate.now());
+            availed.setEndDate(LocalDate.now().plusDays(toSubscribeService.getValidity()));
+        } else {
+            availed.setStartDate(currentservices.get(0).getEndDate());
+            availed.setEndDate(currentservices.get(0).getEndDate().plusDays(toSubscribeService.getValidity()));
+        }
         availed.setActive(true);
         internetServiceAvailedRepo.save(availed);
     }
 
     public List<InternetService> getInternetServicesForUpgradeDowngrade(String serviceName, String serviceType) {
         return internetServiceRepo.findByActiveTrueAndServiceNameAndServiceTypeNot(serviceName,serviceType);
+    }
+
+    public InternetServiceAvailed modifySubscription(ModifySubscription modifySubscription) {
+        InternetServiceAvailed updatedAvail = new InternetServiceAvailed();
+        updatedAvail.setUserId(authService.getCurrentUserDetails().getUserId());
+        updatedAvail.setServiceId(modifySubscription.getNewServiceId());
+        updatedAvail.setStartDate(modifySubscription.getStartDate());
+        updatedAvail.setActive(true);
+        updatedAvail.setEndDate(modifySubscription.getEndDate());
+        updatedAvail.setInternetService(internetServiceRepo.findById(modifySubscription.getNewServiceId()).get());
+        return internetServiceAvailedRepo.save(updatedAvail);
     }
 }

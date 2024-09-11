@@ -1,8 +1,9 @@
 package com.telecom.telecom_service_provisioning.model;
-
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.telecom.telecom_service_provisioning.model.compositekey_models.InternetServicesAvailedId;
 
 import jakarta.persistence.Column;
@@ -48,5 +49,9 @@ public class InternetServiceAvailed {
 
     @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
+
+    @Column(name = "CreatedAt", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Timestamp createdAt;
 }
 

@@ -22,6 +22,10 @@ public interface InternetServiceAvailedRepository extends JpaRepository<Internet
     @Query(value = "SELECT ServiceID, COUNT(ServiceID) AS count FROM Internet_Services_Availed GROUP BY ServiceID ORDER BY count LIMIT 5", nativeQuery = true)
     List<Object[]> findServiceIdAndCount();
 
+    java.util.Optional<InternetServiceAvailed> findByUserIdAndServiceId(Integer userId, Integer serviceId);
+
+    
+
 
 
 }

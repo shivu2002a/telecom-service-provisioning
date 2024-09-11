@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
+import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
+import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.MaxServicesAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
-import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ServiceAlreadyAvailedException;
-import com.telecom.telecom_service_provisioning.model.InternetService;
-import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
@@ -72,24 +71,40 @@ public class TvServiceManager {
     }
 
     public void availTvService(Integer userId, Integer serviceId) throws Exception {
-        List<TvServiceAvailed> availedServices = tvServiceAvailedRepo.findByUserId(userId);
-        TvService toSubscribeService = tvServiceRepo.findById(serviceId).get();
-        for (TvServiceAvailed service : availedServices) {
-            if (service.getTvService().getServiceName().equals(toSubscribeService.getServiceName())) {
-                throw new ServiceAlreadyAvailedException("Tv service: " + toSubscribeService.getServiceName() + " already availed");
-            }
+        //Check if he has subscribed to one, if yes, keep it in q
+        List<TvServiceAvailed> currentservices = tvServiceAvailedRepo.findByUserIdAndActiveTrue(userId);
+        int availedServices = currentservices.size(); 
+        int pendingRequests = pendingRequestRepo.findByUserIdAndServiceTypeAndActiveTrue(userId, PendingRequestServiceType.TV_SERVICE).size();
+        if( pendingRequests + availedServices >= 2) {
+            throw new MaxServicesAlreadyAvailedException("Already availed 2 Tv services");
         }
+        TvService toSubscribeService = tvServiceRepo.findById(serviceId).get();
         TvServiceAvailed availed = new TvServiceAvailed();
         availed.setUserId(userId);
         availed.setServiceId(serviceId);
-        availed.setStartDate(LocalDate.now());
-        availed.setEndDate(LocalDate.now().plusMonths(1));
-        // availed.setUser(authService.getUserDetailsByUserId(userId));
         availed.setActive(true);
+        if(availedServices == 0) {
+            availed.setStartDate(LocalDate.now());
+            availed.setEndDate(LocalDate.now().plusDays(toSubscribeService.getValidity()));
+        } else {
+            availed.setStartDate(currentservices.get(0).getEndDate());
+            availed.setEndDate(currentservices.get(0).getEndDate().plusDays(toSubscribeService.getValidity()));
+        }
         tvServiceAvailedRepo.save(availed);
     }
 
     public List<TvService> getTvServicesForUpgradeDowngrade(String serviceName, String serviceType) {
         return tvServiceRepo.findByActiveTrueAndServiceNameAndServiceTypeNot(serviceName,serviceType);
+    }
+
+    public TvServiceAvailed modifySubscription(ModifySubscription modifySubscription) {
+        TvServiceAvailed updatedAvail = new TvServiceAvailed();
+        updatedAvail.setUserId(authService.getCurrentUserDetails().getUserId());
+        updatedAvail.setServiceId(modifySubscription.getNewServiceId());
+        updatedAvail.setStartDate(modifySubscription.getStartDate());
+        updatedAvail.setActive(true);
+        updatedAvail.setEndDate(modifySubscription.getEndDate());
+        updatedAvail.setTvService(tvServiceRepo.findById(modifySubscription.getNewServiceId()).get());
+        return tvServiceAvailedRepo.save(updatedAvail);
     }
 }

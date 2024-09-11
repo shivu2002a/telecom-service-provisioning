@@ -1,7 +1,7 @@
 services:
   mysql-db:
     image: mysql:8.0
-    container_name: mysql-database-telcoservice
+    container_name: mysql-man
     environment:
       MYSQL_ROOT_PASSWORD: localhost
       MYSQL_DATABASE: telcoservice

@@ -1,5 +1,7 @@
 package com.telecom.telecom_service_provisioning.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import java.sql.Timestamp;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +34,13 @@ public class TvService {
     @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
 
-    @Column(name = "MonthlyCost")
-    private Double monthlyCost;
+    @Column(name = "Cost", nullable = false)
+    private Double cost;
+
+    @Column(name = "validity",  nullable = false)
+    private Integer validity;
+
+    @Column(name = "CreatedAt", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Timestamp createdAt;
 }

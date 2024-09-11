@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.telecom.telecom_service_provisioning.dto.FeedbackDto;
 import com.telecom.telecom_service_provisioning.dto.MostAvailedServicesDto;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
@@ -126,5 +127,11 @@ public class AdminController {
     public ResponseEntity<List<MostAvailedServicesDto>> mostAvailedTvServices() {
         LOGGER.info("Retrieving most availed tv services");
         return ResponseEntity.ok(adminService.getMostAvailedTvService());
+    }
+
+    @GetMapping("/api/feedbacks")
+    public ResponseEntity<FeedbackDto> getFeedbacks() {
+        LOGGER.info("Retrieving all the feedbacks");
+        return ResponseEntity.ok(adminService.getAllFeedbacks());
     }
 }
