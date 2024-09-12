@@ -42,6 +42,7 @@ public class AuthController {
     public ResponseEntity<UserDetailsDto> getUserDetails() {
         UserDetailsDto dto = new UserDetailsDto();
         User user = authService.getCurrentUserDetails();
+        dto.setUserId(user.getUserId());
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
         dto.setUserRole(user.getRole());
