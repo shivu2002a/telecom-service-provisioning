@@ -9,6 +9,9 @@ import com.telecom.telecom_service_provisioning.model.TvServiceFeedback;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceFeedbackRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceFeedbackRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class FeedbackService {
     
@@ -31,9 +34,9 @@ public class FeedbackService {
 	public void createInternetServiceFeedback(Integer availedServiceId, String feedback) throws Exception {
 		InternetServiceFeedback feedbackObj = new InternetServiceFeedback();
         feedbackObj.setFeedback(feedback);
-        feedbackObj.setUsername(feedback);
         feedbackObj.setUsername(authservice.getCurrentUserDetails().getUsername());
         feedbackObj.setInternetService(internetServiceManager.getInternetServiceDetails(availedServiceId));
+        LOGGER.info("Saving the internetservice feedback: {}", feedbackObj);
         internetServiceFeedbackRepo.save(feedbackObj);
 	}
 

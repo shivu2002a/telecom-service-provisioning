@@ -1,5 +1,6 @@
 package com.telecom.telecom_service_provisioning.repository;
 
+import org.apache.el.stream.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,9 @@ public interface InternetServiceAvailedRepository extends JpaRepository<Internet
     List<Object[]> findServiceIdAndCount();
 
     java.util.Optional<InternetServiceAvailed> findByUserIdAndServiceId(Integer userId, Integer serviceId);
+
+    @Query("SELECT i FROM InternetServiceAvailed i WHERE i.userId = :userId AND i.serviceId = :serviceId AND i.startDate = :startDate AND i.active = true")
+    java.util.Optional<InternetServiceAvailed> findByCompositeKeyAndActiveTrue(Integer userId, Integer serviceId, LocalDate startDate);
 
     
 

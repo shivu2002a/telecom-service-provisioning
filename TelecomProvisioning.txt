@@ -131,6 +131,25 @@ CREATE TABLE pendingrequests (
     serviceid int
 );
 
+CREATE TABLE internet_service_feedback {
+    id int,
+    service_id int,
+    feedback varchar(500),
+    user_id int,
+    createdAt TIMESTAMP
+    PRIMARY KEY(id),
+    FOREIGN KEY service_id REFERENCES internet_service(service_id)
+}
+
+CREATE TABLE tv_service_feedback {
+    id int,
+    service_id int,
+    feedback varchar(500),
+    user_id int,
+    createdAt TIMESTAMP
+    PRIMARY KEY(id),
+    FOREIGN KEY service_id REFERENCES tv_service(service_id)
+}
 ✅ Pending requests of user 
 ✅ Phno in reg,
 ✅ validity num of days in each service
@@ -138,5 +157,14 @@ CREATE TABLE pendingrequests (
 ✅ Feedback
 ✅ number of services availed by user
 
-Update upgrading, downgrading, subscribe, terminate as for the Q
-Address in UserModel
+✅ Update upgrading, downgrading, subscribe, terminate as for the Q
+✅ Address in UserModel
+
+
+✅ Tested Tv services subscribe and terminate along with pendingrequests
+✅ Tested CRUD for both type services
+✅ Tested feedback create/read apis
+✅ Tested PendingRequest apis
+
+To do
+Test internet services subscribe and terminate along with pendingrequests

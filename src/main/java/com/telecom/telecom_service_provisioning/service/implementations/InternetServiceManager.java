@@ -15,11 +15,15 @@ import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.User;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.InternetServicesAvailedId;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceRepository;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class InternetServiceManager {
 
     @Autowired
@@ -51,6 +55,9 @@ public class InternetServiceManager {
         Integer userId = authService.getCurrentUserDetails().getUserId();
         if (service.getCriteria() == null || service.getCriteria().isEmpty()) {
             // Direct subscription
+            if (internetServiceAvailedRepo.findByUserIdAndActiveTrue(serviceId).size() >= 2) {
+                throw new MaxServicesAlreadyAvailedException("Already availed/requested 2 Tv services");
+            }
             availInternetService(userId, serviceId);
             return true;
         } else {
@@ -75,6 +82,7 @@ public class InternetServiceManager {
     public void availInternetService(Integer userId, Integer serviceId) throws Exception {
         InternetService toSubscribeService = internetServiceRepo.findById(serviceId).get();
         List<InternetServiceAvailed> currentservices = internetServiceAvailedRepo.findByUserIdAndActiveTrue(userId);
+        LOGGER.info("Currently availed internet services: {}", currentservices);
         int availedServices = currentservices.size(); 
         int pendingRequests = pendingRequestRepo.findByUserIdAndServiceTypeAndActiveTrue(userId, PendingRequestServiceType.INTERNET_SERVICE).size();
         if( pendingRequests + availedServices >= 2) {
@@ -100,10 +108,18 @@ public class InternetServiceManager {
     }
 
     public InternetServiceAvailed modifySubscription(ModifySubscription modifySubscription) {
+        Integer userId = authService.getCurrentUserDetails().getUserId();
+        Integer oldServiceId = modifySubscription.getOldServiceId();
+        LocalDate oldDate = modifySubscription.getStartDate();
+        InternetServiceAvailed old = internetServiceAvailedRepo.findByCompositeKeyAndActiveTrue(userId, oldServiceId, oldDate).get();
+        old.setActive(false);
+        old.setEndDate(LocalDate.now());
+        internetServiceAvailedRepo.save(old);
+
         InternetServiceAvailed updatedAvail = new InternetServiceAvailed();
-        updatedAvail.setUserId(authService.getCurrentUserDetails().getUserId());
+        updatedAvail.setUserId(userId);
         updatedAvail.setServiceId(modifySubscription.getNewServiceId());
-        updatedAvail.setStartDate(modifySubscription.getStartDate());
+        updatedAvail.setStartDate(oldDate);
         updatedAvail.setActive(true);
         updatedAvail.setEndDate(modifySubscription.getEndDate());
         updatedAvail.setInternetService(internetServiceRepo.findById(modifySubscription.getNewServiceId()).get());

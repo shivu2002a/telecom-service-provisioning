@@ -11,10 +11,13 @@ import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.MaxServicesAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
+import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.User;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.InternetServicesAvailedId;
+import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServicesAvailedId;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceRepository;
@@ -48,6 +51,9 @@ public class TvServiceManager {
                             .orElseThrow(() -> new ResourceNotFoundException("Tv Service with id: " + serviceId + "doesn't exists !!"));
         if (service.getCriteria() == null || service.getCriteria().isEmpty()) {
             // Direct subscription
+            if (tvServiceAvailedRepo.findByUserIdAndActiveTrue(serviceId).size() >= 2) {
+                throw new MaxServicesAlreadyAvailedException("Already availed/requested 2 Tv services");
+            }
             Integer userId = authService.getCurrentUserDetails().getUserId();
             availTvService(userId, serviceId);
             return true;
@@ -76,7 +82,7 @@ public class TvServiceManager {
         int availedServices = currentservices.size(); 
         int pendingRequests = pendingRequestRepo.findByUserIdAndServiceTypeAndActiveTrue(userId, PendingRequestServiceType.TV_SERVICE).size();
         if( pendingRequests + availedServices >= 2) {
-            throw new MaxServicesAlreadyAvailedException("Already availed 2 Tv services");
+            throw new MaxServicesAlreadyAvailedException("Already availed/requested 2 Tv services");
         }
         TvService toSubscribeService = tvServiceRepo.findById(serviceId).get();
         TvServiceAvailed availed = new TvServiceAvailed();
@@ -98,6 +104,14 @@ public class TvServiceManager {
     }
 
     public TvServiceAvailed modifySubscription(ModifySubscription modifySubscription) {
+        Integer userId = authService.getCurrentUserDetails().getUserId();
+        Integer oldServiceId = modifySubscription.getOldServiceId();
+        LocalDate oldDate = modifySubscription.getStartDate();
+        TvServiceAvailed old = tvServiceAvailedRepo.findByCompositeKeyAndActiveTrue(userId, oldServiceId, oldDate).get();
+        old.setActive(false);
+        old.setEndDate(LocalDate.now());
+        tvServiceAvailedRepo.save(old);
+        
         TvServiceAvailed updatedAvail = new TvServiceAvailed();
         updatedAvail.setUserId(authService.getCurrentUserDetails().getUserId());
         updatedAvail.setServiceId(modifySubscription.getNewServiceId());
