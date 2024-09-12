@@ -8,7 +8,7 @@ class TelecomServiceProvisioningApplicationTests {
 
 	@Test
 	void contextLoads() {
-		
+
 	}
 
 }
