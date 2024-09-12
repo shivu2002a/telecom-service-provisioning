@@ -1,7 +1,6 @@
 package com.telecom.telecom_service_provisioning;
 
 import com.telecom.telecom_service_provisioning.controller.TvServiceController;
-import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.service.implementations.TvServiceManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -99,15 +98,15 @@ public class TvServiceControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.serviceName").value("Premium TV"));
     }
 
-//    @Test
-//    public void testGetTvServiceDetailsById_NotFound() throws Exception {
-//        // Define the behavior of the mock service
-//        when(tvServiceManager.getTvServiceDetails(999)).thenReturn(null);
-//
-//        // Perform the test
-//        mockMvc.perform(MockMvcRequestBuilders.get("/api/tv-services/999")
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//    }
+    @Test
+    public void testGetTvServiceDetailsById() throws Exception {
+        // Define the behavior of the mock service
+        when(tvServiceManager.getTvServiceDetails(999)).thenReturn(null);
+
+        // Perform the test
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/tv-services/999")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+   }
 }
 

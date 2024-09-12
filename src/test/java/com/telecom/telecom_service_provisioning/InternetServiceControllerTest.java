@@ -3,7 +3,6 @@ package com.telecom.telecom_service_provisioning;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.telecom.telecom_service_provisioning.controller.InternetServiceController;
-import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,11 +13,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Collections;
-import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
+
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
