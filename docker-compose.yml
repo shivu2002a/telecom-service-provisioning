@@ -14,7 +14,7 @@ services:
 
   spring-app:
     image: telcoservice
-    container_name: telcoservice-app-container
+    container_name: telcoservice-app
     depends_on:
       - mysql-db
     environment:

@@ -40,7 +40,8 @@ pipeline {
         }
         stage("7. Run the docker compose") {
             steps {
-                bat "docker rm \$(docker ps -a -q -f name=mysql-man)"
+                bat "docker stop mysql-man || true && docker rm mysql-man || true"
+		bat "docker stop telcoservice-app || true && docker rm telcoservice-app || true"
                 bat "docker compose up -d"
             }
         }
