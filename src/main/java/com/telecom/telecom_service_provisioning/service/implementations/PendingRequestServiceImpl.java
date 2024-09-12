@@ -10,10 +10,10 @@ import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
-import com.telecom.telecom_service_provisioning.service.Interfaces.PendingRequestService;
+import com.telecom.telecom_service_provisioning.service.Interfaces.PendingRequestServiceInterface;
 
 @Service
-public class PendingRequestServiceImpl implements PendingRequestService {
+public class PendingRequestServiceImpl implements PendingRequestServiceInterface {
 
     @Autowired
     private PendingRequestRepository pendingRequestsRepo;

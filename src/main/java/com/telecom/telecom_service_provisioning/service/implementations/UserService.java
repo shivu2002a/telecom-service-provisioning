@@ -56,6 +56,7 @@ public class UserService {
     public UserDetailsDto getUserDetails() {
         UserDetailsDto user = new UserDetailsDto();
         User cur = authService.getCurrentUserDetails();
+        user.setUserId(cur.getUserId());
         user.setEmail(cur.getEmail());
         user.setUsername(cur.getUsername());
         user.setUserRole(cur.getRole());
