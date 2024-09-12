@@ -117,7 +117,7 @@ public class AdminController {
         return new ResponseEntity<>(pendingRequestService.getAllPendingRequest(), HttpStatus.OK);
     }
 
-    @GetMapping("/api/availed-internet-services")
+    @GetMapping("/api/most-availed-internet-services")
     public ResponseEntity<List<MostAvailedServicesDto>> mostAvailedInternetServices() {
         LOGGER.info("Retrieving most availed internet services");
         return ResponseEntity.ok(adminService.getMostAvailedInternetService());
