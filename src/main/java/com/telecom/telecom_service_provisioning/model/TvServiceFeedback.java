@@ -28,8 +28,9 @@ public class TvServiceFeedback {
     @Column(name = "feedback")
     private String feedback;
 
+
     @ManyToOne
-    @JoinColumn(name = "ServiceID", insertable = false, updatable = false)
+    @JoinColumn(name = "Service_ID") //insertable = false, updatable = false
     private TvService tvService;
 
     @Column(name = "username")

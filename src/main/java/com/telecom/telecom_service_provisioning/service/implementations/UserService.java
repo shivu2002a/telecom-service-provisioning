@@ -47,12 +47,10 @@ public class UserService {
 
     public void deactivateInternetService(Integer availedServiceId, LocalDate startDate) throws Exception {
         availedInternetService.deactivateService(availedServiceId, startDate);
-        //If he has any services in q, activate it
     }
 
     public void deactivateTvService(Integer availedServiceId, LocalDate startDate)throws Exception{
         availedTvService.deactivateService(availedServiceId, startDate);
-        //If he has any services in q, activate it
     }
 
     public UserDetailsDto getUserDetails() {
