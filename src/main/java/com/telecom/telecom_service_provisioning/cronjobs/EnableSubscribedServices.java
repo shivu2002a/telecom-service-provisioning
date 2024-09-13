@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @EnableScheduling
 @Slf4j
-public class DisableSubscribedServices {
+public class EnableSubscribedServices {
     
     @Autowired
     private InternetServiceAvailedRepository internetServiceAvailedRepo;
@@ -27,23 +27,23 @@ public class DisableSubscribedServices {
     private TvServiceAvailedRepository tvServiceAvailedRepo;
 
     @Scheduled(cron = "0 0 0 * * *")
-    private void disableAvailedInternetServices(){
-        LOGGER.info("DisableAvailedInternetServices called from: {}", this.getClass().getName());;
-        List<InternetServiceAvailed> internetServices = internetServiceAvailedRepo.findByEndDate(LocalDate.now());
+    private void enableInternetServiceInQeue(){
+        LOGGER.info("EnableInternetServiceInQeue called from: {}", this.getClass().getName());;
+        List<InternetServiceAvailed> internetServices = internetServiceAvailedRepo.findByStartDate(LocalDate.now());
         if(internetServices == null) return;
         for (InternetServiceAvailed internetServiceAvailed : internetServices) {
-            internetServiceAvailed.setActive(false);
+            internetServiceAvailed.setActive(true);
             internetServiceAvailedRepo.save(internetServiceAvailed);
         }
     }
 
     @Scheduled(cron = "0 0 0 * * *")
-    private void disableAvailedTvServices() {
-        LOGGER.info("DisableAvailedTvServices called from: {}", this.getClass().getName());;
-        List<TvServiceAvailed> tvServices = tvServiceAvailedRepo.findByEndDate(LocalDate.now());
+    private void enableAvailedTvServiceInQeue() {
+        LOGGER.info("EnableAvailedTvServiceInQeue called from: {}", this.getClass().getName());;
+        List<TvServiceAvailed> tvServices = tvServiceAvailedRepo.findByStartDate(LocalDate.now());
         if(tvServices == null) return;
         for (TvServiceAvailed tvServiceAvailed : tvServices) {
-            tvServiceAvailed.setActive(false);
+            tvServiceAvailed.setActive(true);
             tvServiceAvailedRepo.save(tvServiceAvailed);
         }
     }
