@@ -30,4 +30,6 @@ public interface TvServiceAvailedRepository extends JpaRepository<TvServiceAvail
     @Query("SELECT i FROM TvServiceAvailed i WHERE i.userId = :userId AND i.serviceId = :serviceId AND i.startDate = :startDate AND i.active = true")
     java.util.Optional<TvServiceAvailed> findByCompositeKeyAndActiveTrue(Integer userId, Integer serviceId, LocalDate startDate);
 
+    List<TvServiceAvailed> findByStartDate(LocalDate now);
+
 }

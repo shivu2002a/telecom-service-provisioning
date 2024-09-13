@@ -28,6 +28,8 @@ public interface InternetServiceAvailedRepository extends JpaRepository<Internet
     @Query("SELECT i FROM InternetServiceAvailed i WHERE i.userId = :userId AND i.serviceId = :serviceId AND i.startDate = :startDate AND i.active = true")
     java.util.Optional<InternetServiceAvailed> findByCompositeKeyAndActiveTrue(Integer userId, Integer serviceId, LocalDate startDate);
 
+    List<InternetServiceAvailed> findByStartDate(LocalDate now);
+
     
 
 

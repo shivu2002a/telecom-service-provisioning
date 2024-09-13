@@ -47,7 +47,7 @@ public class InternetService {
     @Column(name = "active", columnDefinition = "tinyint default 1")
     private Boolean active;
 
-    @Column(name = "MonthlyCost", nullable = false)
+    @Column(name = "cost", nullable = false)
     private Double cost;
 
     @Column(name = "validity",  nullable = false)
