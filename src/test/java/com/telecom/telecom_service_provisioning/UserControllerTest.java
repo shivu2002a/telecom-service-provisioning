@@ -3,10 +3,7 @@ package com.telecom.telecom_service_provisioning;
 import com.telecom.telecom_service_provisioning.controller.UserController;
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
-import com.telecom.telecom_service_provisioning.model.InternetService;
-import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
-import com.telecom.telecom_service_provisioning.model.TvService;
-import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
+import com.telecom.telecom_service_provisioning.model.*;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;
 import com.telecom.telecom_service_provisioning.service.implementations.TvServiceManager;
 import com.telecom.telecom_service_provisioning.service.implementations.UserService;
@@ -21,10 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -205,6 +204,56 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.username").value("John Doe"))
                 .andExpect(jsonPath("$.email").value("john.doe@example.com"));
     }
+
+    @Test
+    void testGetPendingRequestsOfUser() {
+        // Arrange
+        List<PendingRequest> pendingRequests = new ArrayList<>(); // Empty or mocked list
+        when(userService.getAllPendingRequests()).thenReturn(pendingRequests);
+
+        // Act
+        ResponseEntity<List<PendingRequest>> response = userController.getPendingRequestsOfUser();
+
+        // Assert
+        verify(userService).getAllPendingRequests(); // Verifies if service method is called
+        assertThat(response.getBody()).isEqualTo(pendingRequests); // Asserts the response body
+        assertThat(response.getStatusCodeValue()).isEqualTo(200); // Asserts HTTP status code
+    }
+
+    @Test
+    void testPostInternetServiceFeedback() throws Exception {
+        // Arrange
+        Integer availedServiceId = 1;
+        String feedback = "Great service!";
+        doNothing().when(userService).createInternetServiceFeedback(availedServiceId, feedback);
+
+        // Act
+        ResponseEntity<String> response = userController.postInternetServiceFeedback(availedServiceId, feedback);
+
+        // Assert
+        verify(userService).createInternetServiceFeedback(availedServiceId, feedback); // Verifies service method call
+        assertThat(response.getBody()).isEqualTo("Internet service feedback created successfully"); // Asserts response message
+        assertThat(response.getStatusCodeValue()).isEqualTo(200); // Asserts HTTP status code
+    }
+
+    @Test
+    void testPostTvServiceFeedback() throws Exception {
+        // Arrange
+        Integer availedServiceId = 2;
+        String feedback = "Nice TV service!";
+        doNothing().when(userService).createTvServiceFeedback(availedServiceId, feedback);
+
+        // Act
+        ResponseEntity<String> response = userController.postTvServiceFeedback(availedServiceId, feedback);
+
+        // Assert
+        verify(userService).createTvServiceFeedback(availedServiceId, feedback); // Verifies service method call
+        assertThat(response.getBody()).isEqualTo("Tv service Feedback created successfully"); // Asserts response message
+        assertThat(response.getStatusCodeValue()).isEqualTo(200); // Asserts HTTP status code
+    }
+
+
+
 }
 
 

@@ -1,5 +1,6 @@
 package com.telecom.telecom_service_provisioning;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -7,6 +8,8 @@ import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.telecom.telecom_service_provisioning.controller.AdminController;
+import com.telecom.telecom_service_provisioning.dto.FeedbackDto;
+import com.telecom.telecom_service_provisioning.dto.MostAvailedServicesDto;
 import com.telecom.telecom_service_provisioning.model.InternetService;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
@@ -19,11 +22,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Collections;
+import java.util.List;
 
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
@@ -281,4 +286,52 @@ class AdminControllerTest {
 
         assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
     }
+
+
+    @Test
+    void testMostAvailedInternetServices() {
+        // Arrange
+        List<MostAvailedServicesDto> mostAvailedServices = List.of(new MostAvailedServicesDto());
+        when(adminService.getMostAvailedInternetService()).thenReturn(mostAvailedServices);
+
+        // Act
+        ResponseEntity<List<MostAvailedServicesDto>> response = adminController.mostAvailedInternetServices();
+
+        // Assert
+        verify(adminService).getMostAvailedInternetService();
+        assertThat(response.getBody()).isEqualTo(mostAvailedServices);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+
+    @Test
+    void testMostAvailedTvServices() {
+        // Arrange
+        List<MostAvailedServicesDto> mostAvailedServices = List.of(new MostAvailedServicesDto());
+        when(adminService.getMostAvailedTvService()).thenReturn(mostAvailedServices);
+
+        // Act
+        ResponseEntity<List<MostAvailedServicesDto>> response = adminController.mostAvailedTvServices();
+
+        // Assert
+        verify(adminService).getMostAvailedTvService();
+        assertThat(response.getBody()).isEqualTo(mostAvailedServices);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void testGetFeedbacks() {
+        // Arrange
+        FeedbackDto feedbackDto = new FeedbackDto();
+        when(adminService.getAllFeedbacks()).thenReturn(feedbackDto);
+        // Act
+        ResponseEntity<FeedbackDto> response = adminController.getFeedbacks();
+        // Assert
+        verify(adminService).getAllFeedbacks();
+        assertThat(response.getBody()).isEqualTo(feedbackDto);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+
+
 }

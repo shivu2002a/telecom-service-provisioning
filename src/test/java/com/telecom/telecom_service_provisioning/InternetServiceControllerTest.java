@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Collections;
@@ -85,15 +86,16 @@ public class InternetServiceControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(service)));
     }
-//    @Test
-//    public void testGetInternetServiceDetailsById_NotFound() throws Exception {
-//        // Define the behavior of the mock service
-//        when(internetServiceManager.getInternetServiceDetails(999)).thenReturn(null);
-//
-//        // Perform the test
-//        mockMvc.perform(get("/api/internet-services/999")
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    @Test
+    public void testGetInternetServiceDetailsById_NotFound() throws Exception {
+        // Define the behavior of the mock service
+        when(internetServiceManager.getInternetServiceDetails(999)).thenReturn(null);
+
+        // Perform the test
+        mockMvc.perform(get("/api/internet-services/999")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
 }
 
