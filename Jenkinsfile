@@ -23,22 +23,27 @@ pipeline {
                 bat "mvn clean compile"
             }
         }
-        stage("4. Install the jar") {
-            steps {
-                bat "mvn install"
-            }
-        }
-        stage("5. Run the tests") {
+	stage("4. Run the tests") {
             steps {
                 bat "mvn test"
             }
         }
-        stage("6. Build the docker image") {
+        stage("5. App packaging") {
+            steps {
+                bat "mvn package"
+            }
+        }
+	stage("6. Install the jar") {
+            steps {
+                bat "mvn install"
+            }
+        }
+        stage("7. Build the docker image") {
             steps {
                 bat "docker build -t telcoservice ."
             }
         }
-        stage("7. Run the docker compose") {
+        stage("8. Run the docker compose") {
             steps {
                 bat "docker compose up -d"
             }
