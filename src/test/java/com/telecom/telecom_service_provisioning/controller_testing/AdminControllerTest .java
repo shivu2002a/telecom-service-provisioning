@@ -1,4 +1,4 @@
-package com.telecom.telecom_service_provisioning;
+package com.telecom.telecom_service_provisioning.controller_testing;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
