@@ -23,7 +23,7 @@ pipeline {
                 bat "mvn clean compile"
             }
         }
-	stage("4. Run the tests") {
+	    stage("4. Run the tests") {
             steps {
                 bat "mvn test"
             }
@@ -33,7 +33,7 @@ pipeline {
                 bat "mvn package"
             }
         }
-	stage("6. Install the jar") {
+	    stage("6. Install the jar") {
             steps {
                 bat "mvn install"
             }
@@ -43,7 +43,21 @@ pipeline {
                 bat "docker build -t telcoservice ."
             }
         }
-        stage("8. Run the docker compose") {
+        stage("8. Remove running containers if exist") {
+            steps {
+                script {
+                    def composeFilePath = "C:\\Users\\e039326\\Downloads\\Project\\telecom-service-provisioning\\docker-compose.yml"
+                    
+                    // Stop the Docker Compose services on Windows
+                    echo "Stopping Docker Compose services..."
+                    bat """
+                        docker-compose -f ${composeFilePath} down
+                    """
+                }
+            }
+        }
+
+        stage("9. Run the docker compose") {
             steps {
                 bat "docker compose up -d"
             }
