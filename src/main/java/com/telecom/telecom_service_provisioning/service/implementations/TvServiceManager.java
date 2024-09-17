@@ -21,9 +21,10 @@ import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServ
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceRepository;
+import com.telecom.telecom_service_provisioning.service.Interfaces.TvServiceManagerInterface;
 
 @Service
-public class TvServiceManager {
+public class TvServiceManager implements TvServiceManagerInterface {
     
     @Autowired
     private AuthenticationServiceImpl authService;

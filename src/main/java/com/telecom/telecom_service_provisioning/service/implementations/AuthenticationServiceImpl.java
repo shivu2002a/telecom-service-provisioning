@@ -14,9 +14,10 @@ import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.EmailAlreadyTakenException;
 import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.repository.UserRepository;
+import com.telecom.telecom_service_provisioning.service.Interfaces.AuthenticationService;
 
 @Service
-public class AuthenticationServiceImpl {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     public static final String ROLE_USER = "ROLE_USER";
 

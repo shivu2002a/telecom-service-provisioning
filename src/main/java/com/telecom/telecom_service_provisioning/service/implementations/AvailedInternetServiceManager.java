@@ -15,7 +15,7 @@ import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServ
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 
 @Service
-public class AvailedInternetServiceManager {
+public class AvailedInternetServiceManager implements com.telecom.telecom_service_provisioning.service.Interfaces.AvailedInternetServiceManager {
 
     @Autowired
     private AuthenticationServiceImpl authService;

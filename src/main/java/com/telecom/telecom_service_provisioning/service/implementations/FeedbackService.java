@@ -8,12 +8,13 @@ import com.telecom.telecom_service_provisioning.model.InternetServiceFeedback;
 import com.telecom.telecom_service_provisioning.model.TvServiceFeedback;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceFeedbackRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceFeedbackRepository;
+import com.telecom.telecom_service_provisioning.service.Interfaces.FeedbackServiceInterface;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class FeedbackService {
+public class FeedbackService implements FeedbackServiceInterface {
     
     @Autowired
     private TvServiceFeedbackRepository tvServiceFeedbackRepo;
