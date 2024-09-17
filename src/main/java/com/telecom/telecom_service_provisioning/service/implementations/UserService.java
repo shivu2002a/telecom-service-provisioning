@@ -12,9 +12,10 @@ import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
+import com.telecom.telecom_service_provisioning.service.Interfaces.UserServiceInterface;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterface {
 
     @Autowired
     private AvailedInternetServiceManager availedInternetService;

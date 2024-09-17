@@ -15,9 +15,10 @@ import com.telecom.telecom_service_provisioning.repository.InternetServiceAvaile
 import com.telecom.telecom_service_provisioning.repository.InternetServiceRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceRepository;
+import com.telecom.telecom_service_provisioning.service.Interfaces.AdminService;
 
 @Service
-public class AdminServiceImpl {
+public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private InternetServiceRepository internetServiceRepo;

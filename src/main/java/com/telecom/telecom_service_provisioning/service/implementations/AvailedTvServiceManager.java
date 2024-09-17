@@ -13,9 +13,10 @@ import com.telecom.telecom_service_provisioning.exception_handling.customExcepti
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServicesAvailedId;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
+import com.telecom.telecom_service_provisioning.service.Interfaces.AvailedTvServiceManagerInterface;
 
 @Service
-public class AvailedTvServiceManager {
+public class AvailedTvServiceManager implements AvailedTvServiceManagerInterface {
 
 
     @Autowired

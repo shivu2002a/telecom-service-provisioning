@@ -19,12 +19,14 @@ import com.telecom.telecom_service_provisioning.model.compositekey_models.Intern
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceRepository;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
+import com.telecom.telecom_service_provisioning.service.Interfaces.InternetServiceManagerInterface;
+import com.telecom.telecom_service_provisioning.service.Interfaces.TvServiceManagerInterface;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class InternetServiceManager {
+public class InternetServiceManager implements InternetServiceManagerInterface {
 
     @Autowired
     private AuthenticationServiceImpl authService;
