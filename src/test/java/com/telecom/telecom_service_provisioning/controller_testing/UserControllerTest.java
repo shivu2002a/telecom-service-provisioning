@@ -1,4 +1,4 @@
-package com.telecom.telecom_service_provisioning;
+package com.telecom.telecom_service_provisioning.controller_testing;
 
 import com.telecom.telecom_service_provisioning.controller.UserController;
 import com.telecom.telecom_service_provisioning.dto.AvailedServices;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;

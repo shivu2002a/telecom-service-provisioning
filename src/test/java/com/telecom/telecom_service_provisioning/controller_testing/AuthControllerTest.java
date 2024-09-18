@@ -1,4 +1,4 @@
-package com.telecom.telecom_service_provisioning;
+package com.telecom.telecom_service_provisioning.controller_testing;
 
 import com.telecom.telecom_service_provisioning.controller.AuthController;
 import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
