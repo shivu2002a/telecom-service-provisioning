@@ -66,5 +66,9 @@ public class AvailedInternetServiceManager implements com.telecom.telecom_servic
     public List<InternetServiceAvailed> findByEndDate(LocalDate todayDate) {
         return internetServiceAvailedRepo.findByEndDate(todayDate);
     }
+
+    public List<InternetServiceAvailed> getInactiveSubscribedServices(Integer userId) {
+        return internetServiceAvailedRepo.findByUserIdAndActiveFalse(userId);
+    }
     
 }

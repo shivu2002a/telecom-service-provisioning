@@ -83,6 +83,16 @@ public class UserController {
         return new ResponseEntity<>(allSubscribedServices, HttpStatus.OK);
     }
 
+    @GetMapping("/api/subscribed-services/inactive")
+    public ResponseEntity<AvailedServices> getPrevSubscribedServices() {
+        LOGGER.info("Retrieving all previously subscribed services !!");
+        AvailedServices allPrevSubscribedServices = userService.getAllPrevSubscribedServices();
+        if (allPrevSubscribedServices.getInternetServicesAvailed() == null && allPrevSubscribedServices.getTvServicesAvailed() == null ) {
+            return new ResponseEntity<>(allPrevSubscribedServices, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(allPrevSubscribedServices, HttpStatus.OK);
+    }
+
     @GetMapping("/api/internet-service/other")
     public ResponseEntity<List<InternetService>> getAvailableInternetServicesForUpgradeOrDowngrade(@RequestParam String serviceName, @RequestParam String serviceType) {
         LOGGER.info("Alternatives for up/down grading a internet service.");
@@ -150,6 +160,5 @@ public class UserController {
         userService.createTvServiceFeedback(availedServiceId, feedback);
         return ResponseEntity.ok("Tv service Feedback created successfully");
     }
-
 
 }

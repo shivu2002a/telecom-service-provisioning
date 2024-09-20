@@ -30,6 +30,8 @@ public interface InternetServiceAvailedRepository extends JpaRepository<Internet
 
     List<InternetServiceAvailed> findByStartDate(LocalDate now);
 
+    List<InternetServiceAvailed> findByUserIdAndActiveFalse(Integer userId);
+
     
 
 

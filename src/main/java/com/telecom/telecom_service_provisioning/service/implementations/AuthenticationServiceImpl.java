@@ -32,7 +32,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new EmailAlreadyTakenException("Email or username is already taken");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(ROLE_USER); 
+        if(user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole(ROLE_USER); 
+        }
         userRepository.save(user);
     }
 
