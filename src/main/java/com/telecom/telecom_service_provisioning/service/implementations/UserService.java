@@ -78,5 +78,19 @@ public class UserService implements UserServiceInterface {
     public void createInternetServiceFeedback(Integer availedInternetServiceId, String feedback) throws Exception {
         feedbackService.createInternetServiceFeedback(availedInternetServiceId, feedback);
     }
+
+    public AvailedServices getAllPrevSubscribedServices() {
+        Integer userId = authService.getCurrentUserDetails().getUserId();
+        java.util.List<InternetServiceAvailed> prevAvailedInternetServices = availedInternetService.getInactiveSubscribedServices(userId);
+        java.util.List<TvServiceAvailed> prevAvailedTvServices = availedTvService.getInactiveSubscribedServices(userId);
+        
+        AvailedServices availedServices = new AvailedServices();
+        if (prevAvailedInternetServices.isEmpty() && prevAvailedTvServices.isEmpty()) {
+            return availedServices;
+        }
+        availedServices.setInternetServicesAvailed(prevAvailedInternetServices); 
+        availedServices.setTvServicesAvailed(prevAvailedTvServices); 
+        return availedServices;
+    }
     
 }

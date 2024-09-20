@@ -64,4 +64,8 @@ public class AvailedTvServiceManager implements AvailedTvServiceManagerInterface
             availedTvServiceRepo.save(activateService);
         }
     }
+
+    public List<TvServiceAvailed> getInactiveSubscribedServices(Integer userId) {
+        return availedTvServiceRepo.findByUserIdAndActiveFalse(userId);
+    }
 }

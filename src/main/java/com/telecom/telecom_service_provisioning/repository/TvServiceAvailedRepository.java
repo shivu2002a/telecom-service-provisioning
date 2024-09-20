@@ -32,4 +32,6 @@ public interface TvServiceAvailedRepository extends JpaRepository<TvServiceAvail
 
     List<TvServiceAvailed> findByStartDate(LocalDate now);
 
+    List<TvServiceAvailed> findByUserIdAndActiveFalse(Integer userId);
+
 }
