@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Termination - Telcoservice</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #3a4750, #303841);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        .header img {
+            max-width: 120px;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .content {
+            padding: 40px 30px;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #3a4750;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .service-details {
+            background-color: #f0f4f8;
+            border-left: 4px solid #3a4750;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .service-details p {
+            margin: 10px 0;
+        }
+        .message {
+            background-color: #ffe6e6;
+            border: 1px solid #ffcccc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #3a4750;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #303841;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #3a4750, #303841);
+            color: white;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo -->
+        <div class="header">
+            <img src="https://raw.githubusercontent.com/shivu2002a/email-service/refs/heads/main/src/main/resources/static/Blue-and-orange.jfif" alt="Telcoservice Logo">
+            <h1>Service Termination</h1>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content">
+            <h2>Dear <span th:text="${dto.username}">Valued Customer</span>,</h2>
+            <p>We hope this message finds you well. We regret to inform you that your service with Telcoservice is scheduled for termination. We're sorry to see you go and want to ensure a smooth transition for you.</p>
+
+            <div class="message">
+                <p>We value your patronage and would love to keep you as our customer. If you've changed your mind or if there's anything we can do to improve your experience, please don't hesitate to reach out.</p>
+            </div>
+
+            <!-- Service Details -->
+            <div class="service-details">
+                <p><strong>Service Name:</strong> <span th:text="${dto.serviceName}">Internet 100Mbps</span></p>
+                <p><strong>Service Type:</strong> <span th:text="${dto.serviceType}">Internet</span></p>
+                <p><strong>Service Start Date:</strong> <span th:text="${dto.startDate}">01-Jan-2024</span></p>
+                <p><strong>Service End Date:</strong> <span th:text="${dto.endDate}">31-Dec-2024</span></p>
+                <p><strong>Number of days used:</strong> <span th:text="${dto.noOfDaysUsed}">10</span></p>
+            </div>
+
+            <p>We want to thank you for choosing Telcoservice and for the trust you've placed in us. Your feedback is important to us, and we'd appreciate hearing about your experience with our service.</p>
+
+            <p>If you have any questions about the termination process or if you'd like to discuss options for continuing your service, please don't hesitate to contact our support team.</p>
+
+            <p style="text-align: center; margin-top: 30px;">
+                <a href="#" class="cta-button">Contact Us to Discuss Options</a>
+            </p>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2024 Telcoservice Provisioning. All rights reserved.</p>
+            <p><a href="mailto:telcoservice.helpdesk@gmail.com">Contact Support</a></p>
+        </div>
+    </div>
+</body>
+</html>

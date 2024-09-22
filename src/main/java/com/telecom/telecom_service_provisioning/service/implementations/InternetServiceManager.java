@@ -3,7 +3,12 @@ package com.telecom.telecom_service_provisioning.service.implementations;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.telecom.telecom_service_provisioning.dto.ActivationMailDto;
+import com.telecom.telecom_service_provisioning.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.concurrent.DelegatingSecurityContextRunnable;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
@@ -11,16 +16,10 @@ import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.MaxServicesAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
-import com.telecom.telecom_service_provisioning.model.InternetService;
-import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
-import com.telecom.telecom_service_provisioning.model.PendingRequest;
-import com.telecom.telecom_service_provisioning.model.User;
-import com.telecom.telecom_service_provisioning.model.compositekey_models.InternetServicesAvailedId;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceRepository;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
 import com.telecom.telecom_service_provisioning.service.Interfaces.InternetServiceManagerInterface;
-import com.telecom.telecom_service_provisioning.service.Interfaces.TvServiceManagerInterface;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +35,9 @@ public class InternetServiceManager implements InternetServiceManagerInterface {
 
     @Autowired
     private PendingRequestRepository pendingRequestRepo;
+
+    @Autowired
+    private EmailMiddlewareService emailMiddlewareService;
 
     @Autowired
     private InternetServiceAvailedRepository internetServiceAvailedRepo;
@@ -103,6 +105,25 @@ public class InternetServiceManager implements InternetServiceManagerInterface {
         }
         availed.setActive(true);
         internetServiceAvailedRepo.save(availed);
+        sendSubscribedMail(toSubscribeService, availed);
+    }
+
+    public void sendSubscribedMail(InternetService service, InternetServiceAvailed availed)  {
+        ActivationMailDto dto = new ActivationMailDto();
+        User user = authService.getCurrentUserDetails();
+        dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
+        dto.setSubject("Internet Service Subscribed");
+
+        dto.setServiceName(service.getServiceName());
+        dto.setServiceType(service.getServiceType());
+        dto.setServiceBenefits(service.getBenefits());
+        dto.setServiceDescription(service.getDescription());
+        dto.setServiceCost(service.getCost());
+        dto.setServiceValidity(service.getValidity());
+        dto.setStartDate(availed.getStartDate());
+        dto.setEndDate(availed.getEndDate());
+        emailMiddlewareService.sendServiceActivationMail(dto);
     }
 
     public List<InternetService> getInternetServicesForUpgradeDowngrade(String serviceName, String serviceType) {
