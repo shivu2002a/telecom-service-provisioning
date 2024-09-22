@@ -3,7 +3,11 @@ package com.telecom.telecom_service_provisioning.service.implementations;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.telecom.telecom_service_provisioning.dto.ActivationMailDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.concurrent.DelegatingSecurityContextRunnable;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
@@ -11,13 +15,10 @@ import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.MaxServicesAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
-import com.telecom.telecom_service_provisioning.model.InternetServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
 import com.telecom.telecom_service_provisioning.model.TvService;
 import com.telecom.telecom_service_provisioning.model.TvServiceAvailed;
 import com.telecom.telecom_service_provisioning.model.User;
-import com.telecom.telecom_service_provisioning.model.compositekey_models.InternetServicesAvailedId;
-import com.telecom.telecom_service_provisioning.model.compositekey_models.TvServicesAvailedId;
 import com.telecom.telecom_service_provisioning.repository.PendingRequestRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.repository.TvServiceRepository;
@@ -34,6 +35,9 @@ public class TvServiceManager implements TvServiceManagerInterface {
 
     @Autowired
     private PendingRequestRepository pendingRequestRepo;
+
+    @Autowired
+    private EmailMiddlewareService emailMiddlewareService;
 
     @Autowired
     private TvServiceAvailedRepository tvServiceAvailedRepo;
@@ -98,6 +102,26 @@ public class TvServiceManager implements TvServiceManagerInterface {
             availed.setEndDate(currentservices.get(0).getEndDate().plusDays(toSubscribeService.getValidity()));
         }
         tvServiceAvailedRepo.save(availed);
+
+        sendSubscribedMail(toSubscribeService, availed);
+    }
+
+    public void sendSubscribedMail(TvService tvService, TvServiceAvailed availed)  {
+        ActivationMailDto dto = new ActivationMailDto();
+        User user = authService.getCurrentUserDetails();
+        dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
+        dto.setSubject("Tv Service Subscribed");
+
+        dto.setServiceName(tvService.getServiceName());
+        dto.setServiceType(tvService.getServiceType());
+        dto.setServiceBenefits(tvService.getBenefits());
+        dto.setServiceDescription(tvService.getDescription());
+        dto.setServiceCost(tvService.getCost());
+        dto.setServiceValidity(tvService.getValidity());
+        dto.setStartDate(availed.getStartDate());
+        dto.setEndDate(availed.getEndDate());
+        emailMiddlewareService.sendServiceActivationMail(dto);
     }
 
     public List<TvService> getTvServicesForUpgradeDowngrade(String serviceName, String serviceType) {

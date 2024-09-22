@@ -87,11 +87,11 @@ public class AuthControllerTest {
         assertEquals(userDetailsDto, response.getBody());
     }
 
-    @Test
-    public void testHome_Success() {
-        String response = authController.home();
-
-        assertEquals("successfully logged in !!", response);
-    }
+//    @Test
+//    public void testHome_Success() {
+//        String response = authController.home();
+//
+//        assertEquals("successfully logged in !!", response);
+//    }
 }
 

@@ -1,6 +1,7 @@
 package com.telecom.telecom_service_provisioning.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +18,6 @@ import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
 
 @RestController
-@CrossOrigin
 public class AuthController {
     
     //Sign up
