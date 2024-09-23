@@ -11,6 +11,8 @@ import com.telecom.telecom_service_provisioning.model.compositekey_models.Intern
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
 import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
 import com.telecom.telecom_service_provisioning.service.implementations.AvailedInternetServiceManager;
+import com.telecom.telecom_service_provisioning.service.implementations.EmailMiddlewareService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,6 +32,9 @@ class AvailedInternetServiceManagerTest {
 
     @Mock
     private InternetServiceAvailedRepository internetServiceAvailedRepo;
+
+    @Mock
+    private EmailMiddlewareService emailMiddlewareService;
 
     @InjectMocks
     private AvailedInternetServiceManager availedInternetServiceManager;

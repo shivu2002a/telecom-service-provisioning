@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import com.telecom.telecom_service_provisioning.model.User;
 import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
+import com.telecom.telecom_service_provisioning.service.implementations.EmailMiddlewareService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,6 +33,9 @@ class AuthenticationServiceImplTest {
 
     @InjectMocks
     private AuthenticationServiceImpl authenticationService;
+
+    @Mock
+    private EmailMiddlewareService emailMiddlewareService;
 
     private User user;  // This is the correct field-level user
 

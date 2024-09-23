@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
+import com.telecom.telecom_service_provisioning.service.implementations.EmailMiddlewareService;
 import com.telecom.telecom_service_provisioning.service.implementations.TvServiceManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,9 @@ class TvServiceManagerTest {
 
     @InjectMocks
     private TvServiceManager tvServiceManager;
+
+    @Mock
+    private EmailMiddlewareService emailMiddlewareService;
 
     @BeforeEach
     void setUp() {
