@@ -43,25 +43,25 @@ pipeline {
                 bat "docker build -t telcoservice-backend ."
             }
         }
-        stage("8. Remove running containers if exist") {
-            steps {
-                script {
-                    def composeFilePath = "C:\\Users\\e039326\\Downloads\\Project\\telecom-service-provisioning\\docker-compose.yml"
+        // stage("8. Remove running containers if exist") {
+        //     steps {
+        //         script {
+        //             def composeFilePath = "C:\\Users\\e039326\\Downloads\\Project\\telecom-service-provisioning\\docker-compose.yml"
                     
-                    // Stop the Docker Compose services on Windows
-                    echo "Stopping Docker Compose services..."
-                    bat """
-                        docker-compose -f ${composeFilePath} down
-                    """
-                }
-            }
-        }
+        //             // Stop the Docker Compose services on Windows
+        //             echo "Stopping Docker Compose services..."
+        //             bat """
+        //                 docker-compose -f ${composeFilePath} down
+        //             """
+        //         }
+        //     }
+        // }
 
-        stage("9. Run the docker compose") {
-            steps {
-                bat "docker compose up -d"
-            }
-        }
+        // stage("9. Run the docker compose") {
+        //     steps {
+        //         bat "docker compose up -d"
+        //     }
+        // }
 
     }
 }
