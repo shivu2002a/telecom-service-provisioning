@@ -30,6 +30,9 @@ public class AdminUserInitializer implements CommandLineRunner {
     @Value("${admin.user.phonenumber}")
     private String adminAddress;
 
+    @Value("${react.origin}")
+	private String origin;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -53,5 +56,6 @@ public class AdminUserInitializer implements CommandLineRunner {
         } else {
             LOGGER.info("User table is not empty. No admin user created.");
         }
+        LOGGER.info("From main: Origin recieved (will allow requests from here) :{} ", origin);
     }
 }
