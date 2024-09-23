@@ -6,6 +6,7 @@ com\telecom\telecom_service_provisioning\model\InternetServiceFeedback.class
 com\telecom\telecom_service_provisioning\model\TvServiceAvailed.class
 com\telecom\telecom_service_provisioning\service\Interfaces\AuthenticationService.class
 com\telecom\telecom_service_provisioning\repository\InternetServiceRepository.class
+com\telecom\telecom_service_provisioning\service\implementations\EmailMiddlewareService.class
 com\telecom\telecom_service_provisioning\cronjobs\DisableSubscribedServices.class
 com\telecom\telecom_service_provisioning\repository\TvServiceFeedbackRepository.class
 com\telecom\telecom_service_provisioning\service\implementations\AvailedTvServiceManager.class
@@ -24,7 +25,6 @@ com\telecom\telecom_service_provisioning\model\TvService.class
 com\telecom\telecom_service_provisioning\service\implementations\AuthenticationServiceImpl.class
 com\telecom\telecom_service_provisioning\dto\AvailedServices.class
 com\telecom\telecom_service_provisioning\service\Interfaces\AdminService.class
-com\telecom\telecom_service_provisioning\service\Interfaces\PendingRequestService.class
 com\telecom\telecom_service_provisioning\initialization\AdminUserInitializer.class
 com\telecom\telecom_service_provisioning\model\TvServiceFeedback.class
 com\telecom\telecom_service_provisioning\dto\ModifySubscription.class

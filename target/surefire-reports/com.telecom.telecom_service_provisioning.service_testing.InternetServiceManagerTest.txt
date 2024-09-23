@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: com.telecom.telecom_service_provisioning.service_testing.InternetServiceManagerTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.136 s <<< FAILURE! -- in com.telecom.telecom_service_provisioning.service_testing.InternetServiceManagerTest
+com.telecom.telecom_service_provisioning.service_testing.InternetServiceManagerTest.testAvailInternetService_Success_NewService -- Time elapsed: 0.006 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.telecom.telecom_service_provisioning.model.User.getUsername()" because "user" is null
+	at com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager.sendSubscribedMail(InternetServiceManager.java:114)
+	at com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager.availInternetService(InternetServiceManager.java:108)
+	at com.telecom.telecom_service_provisioning.service_testing.InternetServiceManagerTest.testAvailInternetService_Success_NewService(InternetServiceManagerTest.java:181)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

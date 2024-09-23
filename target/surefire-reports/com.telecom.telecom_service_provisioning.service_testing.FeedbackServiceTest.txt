@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.telecom.telecom_service_provisioning.service_testing.FeedbackServiceTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 s -- in com.telecom.telecom_service_provisioning.service_testing.FeedbackServiceTest

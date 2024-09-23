@@ -8,10 +8,14 @@ C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\co
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\controller\TvServiceController.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\controller\UserController.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\cronjobs\DisableSubscribedServices.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\cronjobs\EnableSubscribedServices.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\ActivationMailDto.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\AvailedServices.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\FeedbackDto.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\ModifySubscription.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\MostAvailedServicesDto.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\RegistrationMailDto.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\TerminationMailDto.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\dto\UserDetailsDto.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\exception_handling\customExceptions\EmailAlreadyTakenException.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\exception_handling\customExceptions\MaxServicesAlreadyAvailedException.java
@@ -43,6 +47,8 @@ C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\co
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\AvailedInternetServiceManager.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\AvailedTvServiceManager.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\CustomUserDetailsServiceImpl.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\EmailMiddlewareService.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\EmailService.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\FeedbackService.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\InternetServiceManager.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\implementations\PendingRequestServiceImpl.java
@@ -51,5 +57,10 @@ C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\co
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\AdminService.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\AuthenticationService.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\AvailedInternetServiceManager.java
-C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\PendingRequestService.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\AvailedTvServiceManagerInterface.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\FeedbackServiceInterface.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\InternetServiceManagerInterface.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\PendingRequestServiceInterface.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\TvServiceManagerInterface.java
+C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\service\Interfaces\UserServiceInterface.java
 C:\Users\e039326\Downloads\Project\telecom-service-provisioning\src\main\java\com\telecom\telecom_service_provisioning\TelecomServiceProvisioningApplication.java

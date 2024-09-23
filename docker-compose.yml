@@ -13,7 +13,7 @@ services:
       - app-network
 
   spring-app:
-    image: telcoservice
+    image: telcoservice-backend
     container_name: telcoservice-app
     depends_on:
       - mysql-db

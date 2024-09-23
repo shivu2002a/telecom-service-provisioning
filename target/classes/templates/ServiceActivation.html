@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Activation - Telcoservice</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #0056b3, #1d8cf8);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        .header img {
+            max-width: 120px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .content {
+            padding: 40px 30px;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #0056b3;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .service-details {
+            background-color: #e6f3ff;
+            border-left: 4px solid #1d8cf8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .service-details p {
+            margin: 10px 0;
+        }
+        .benefits {
+            margin: 20px 0;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .benefits li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .benefits li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1d8cf8;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1d8cf8, #0056b3);
+            color: white;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo -->
+        <div class="header">
+            <img src="https://raw.githubusercontent.com/shivu2002a/email-service/refs/heads/main/src/main/resources/static/Blue-and-orange.jfif" alt="Telcoservice Logo">
+            <h1>Service Activation Confirmation</h1>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content">
+            <h2>Dear <span th:text="${dto.username}">Customer</span>!</h2>
+            <p>We are thrilled to inform you that your service has been successfully activated. Here are the details of your new service:</p>
+
+            <!-- Service Details -->
+            <div class="service-details">
+                <p><strong>Service Name:</strong> <span th:text="${dto.serviceName}">Internet 100Mbps</span></p>
+                <p><strong>Service Type:</strong> <span th:text="${dto.serviceType}">Internet</span></p>
+                <p><strong>Service Description:</strong> <span th:text="${dto.serviceDescription}">High-speed broadband internet</span></p>
+                <p><strong>Service Validity:</strong> <span th:text="${dto.serviceValidity}+ ' days'">12 months</span></p>
+                <p><strong>Service Cost:</strong> <span th:text="'₹ ' + ${dto.serviceCost}">$49.99/month</span></p>
+                <p><strong>Service Start Date:</strong> <span th:text="${dto.startDate}">01-Jan-2024</span></p>
+                <p><strong>Service End Date:</strong> <span th:text="${dto.endDate}">31-Dec-2024</span></p>
+            </div>
+
+            <h3>Service Benefits</h3>
+            <ul class="benefits">
+                <li th:text="${dto.serviceBenefits}">High-Speed Internet</li>
+                <li>24/7 Customer Support</li>
+                <li>Free Installation</li>
+                <!-- <li>No Data Caps</li> -->
+            </ul>
+
+            <p>If you have any questions or need assistance, our dedicated support team is always here to help you.</p>
+
+            <p>Thank you for choosing Telcoservice. We're excited to embark on this journey with you!</p>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2024 Telcoservice Provisioning. All rights reserved.</p>
+            <p><a href="mailto:telcoservice.helpdesk@gmail.com">Contact Support</a></p>
+        </div>
+    </div>
+</body>
+</html>
