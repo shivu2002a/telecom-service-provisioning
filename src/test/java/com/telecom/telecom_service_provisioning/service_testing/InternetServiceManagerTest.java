@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.telecom.telecom_service_provisioning.service.implementations.AuthenticationServiceImpl;
+import com.telecom.telecom_service_provisioning.service.implementations.EmailMiddlewareService;
 import com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,9 @@ class InternetServiceManagerTest {
 
     @Mock
     private InternetServiceAvailedRepository internetServiceAvailedRepo;
+
+    @Mock
+    private EmailMiddlewareService emailMiddlewareService;
 
     @InjectMocks
     private InternetServiceManager internetServiceManager;
