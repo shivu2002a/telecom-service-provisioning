@@ -40,7 +40,7 @@ pipeline {
         }
         stage("7. Build the docker image") {
             steps {
-                bat "docker build -t telcoservice ."
+                bat "docker build -t telcoservice-backend ."
             }
         }
         stage("8. Remove running containers if exist") {

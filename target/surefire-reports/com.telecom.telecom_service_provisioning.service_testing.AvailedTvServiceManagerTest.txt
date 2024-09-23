@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: com.telecom.telecom_service_provisioning.service_testing.AvailedTvServiceManagerTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.075 s <<< FAILURE! -- in com.telecom.telecom_service_provisioning.service_testing.AvailedTvServiceManagerTest
+com.telecom.telecom_service_provisioning.service_testing.AvailedTvServiceManagerTest.testDeactivateService_Success -- Time elapsed: 0.003 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.telecom.telecom_service_provisioning.service.implementations.TvServiceManager.getTvServiceDetails(java.lang.Integer)" because "this.tvService" is null
+	at com.telecom.telecom_service_provisioning.service.implementations.AvailedTvServiceManager.sendTerminationMail(AvailedTvServiceManager.java:72)
+	at com.telecom.telecom_service_provisioning.service.implementations.AvailedTvServiceManager.deactivateService(AvailedTvServiceManager.java:60)
+	at com.telecom.telecom_service_provisioning.service_testing.AvailedTvServiceManagerTest.testDeactivateService_Success(AvailedTvServiceManagerTest.java:66)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
