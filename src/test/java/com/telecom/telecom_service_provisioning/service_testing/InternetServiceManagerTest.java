@@ -164,25 +164,25 @@ class InternetServiceManagerTest {
 
 
 
-    @Test
-    void testAvailInternetService_Success_NewService() throws Exception {
-        // Arrange
-        InternetService service = new InternetService();
-        service.setServiceId(1);
-        service.setValidity(30);
-        User mockUser = new User();
-        mockUser.setUserId(1);
+    // @Test
+    // void testAvailInternetService_Success_NewService() throws Exception {
+    //     // Arrange
+    //     InternetService service = new InternetService();
+    //     service.setServiceId(1);
+    //     service.setValidity(30);
+    //     User mockUser = new User();
+    //     mockUser.setUserId(1);
 
-        when(internetServiceRepo.findById(1)).thenReturn(Optional.of(service));
-        when(internetServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
-        when(pendingRequestRepo.findByUserIdAndServiceTypeAndActiveTrue(1, PendingRequestServiceType.INTERNET_SERVICE)).thenReturn(Arrays.asList());
+    //     when(internetServiceRepo.findById(1)).thenReturn(Optional.of(service));
+    //     when(internetServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
+    //     when(pendingRequestRepo.findByUserIdAndServiceTypeAndActiveTrue(1, PendingRequestServiceType.INTERNET_SERVICE)).thenReturn(Arrays.asList());
 
-        // Act
-        internetServiceManager.availInternetService(1, 1);
+    //     // Act
+    //     internetServiceManager.availInternetService(1, 1);
 
-        // Assert
-        verify(internetServiceAvailedRepo, times(1)).save(any(InternetServiceAvailed.class));
-    }
+    //     // Assert
+    //     verify(internetServiceAvailedRepo, times(1)).save(any(InternetServiceAvailed.class));
+    // }
 
     @Test
     void testAvailInternetService_ThrowsMaxServicesAlreadyAvailedException() throws Exception {

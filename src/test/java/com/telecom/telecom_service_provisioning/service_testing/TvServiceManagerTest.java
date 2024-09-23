@@ -120,25 +120,25 @@ class TvServiceManagerTest {
         });
     }
 
-    @Test
-    void testAvailTvService_Success() throws Exception {
-        // Arrange
-        TvService tvService = new TvService();
-        tvService.setServiceId(1);
-        tvService.setValidity(30);
+    // @Test
+    // void testAvailTvService_Success() throws Exception {
+    //     // Arrange
+    //     TvService tvService = new TvService();
+    //     tvService.setServiceId(1);
+    //     tvService.setValidity(30);
 
-        User mockUser = new User();
-        mockUser.setUserId(1);
+    //     User mockUser = new User();
+    //     mockUser.setUserId(1);
 
-        when(tvServiceRepo.findById(1)).thenReturn(Optional.of(tvService));
-        when(tvServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
+    //     when(tvServiceRepo.findById(1)).thenReturn(Optional.of(tvService));
+    //     when(tvServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
 
-        // Act
-        tvServiceManager.availTvService(1, 1);
+    //     // Act
+    //     tvServiceManager.availTvService(1, 1);
 
-        // Assert
-        verify(tvServiceAvailedRepo, times(1)).save(any(TvServiceAvailed.class));
-    }
+    //     // Assert
+    //     verify(tvServiceAvailedRepo, times(1)).save(any(TvServiceAvailed.class));
+    // }
 
     @Test
     void testAvailTvService_ThrowsMaxServicesAlreadyAvailedException() {

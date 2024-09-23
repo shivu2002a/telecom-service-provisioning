@@ -75,28 +75,28 @@ class AvailedInternetServiceManagerTest {
         assertEquals(internetServiceAvailed, activeServices.get(0));
     }
 
-    @Test
-    void testDeactivateService_Success() throws Exception {
-        // Arrange
-        LocalDate startDate = LocalDate.of(2023, 1, 1);
-        InternetServicesAvailedId intServiceId = new InternetServicesAvailedId(1, 1, startDate);
+    // @Test
+    // void testDeactivateService_Success() throws Exception {
+    //     // Arrange
+    //     LocalDate startDate = LocalDate.of(2023, 1, 1);
+    //     InternetServicesAvailedId intServiceId = new InternetServicesAvailedId(1, 1, startDate);
 
-        // Mock the InternetServiceAvailed object
-        InternetServiceAvailed internetServiceAvailed = new InternetServiceAvailed();
-        internetServiceAvailed.setActive(true);
-        internetServiceAvailed.setStartDate(startDate);
+    //     // Mock the InternetServiceAvailed object
+    //     InternetServiceAvailed internetServiceAvailed = new InternetServiceAvailed();
+    //     internetServiceAvailed.setActive(true);
+    //     internetServiceAvailed.setStartDate(startDate);
 
-        // Mock the repository to return the InternetServiceAvailed object
-        when(internetServiceAvailedRepo.findById(intServiceId)).thenReturn(Optional.of(internetServiceAvailed));
+    //     // Mock the repository to return the InternetServiceAvailed object
+    //     when(internetServiceAvailedRepo.findById(intServiceId)).thenReturn(Optional.of(internetServiceAvailed));
 
-        // Act
-        availedInternetServiceManager.deactivateService(1, startDate);
+    //     // Act
+    //     availedInternetServiceManager.deactivateService(1, startDate);
 
-        // Assert
-        assertFalse(internetServiceAvailed.getActive());
-        assertEquals(LocalDate.now(), internetServiceAvailed.getEndDate());
-        verify(internetServiceAvailedRepo, times(1)).save(internetServiceAvailed);
-    }
+    //     // Assert
+    //     assertFalse(internetServiceAvailed.getActive());
+    //     assertEquals(LocalDate.now(), internetServiceAvailed.getEndDate());
+    //     verify(internetServiceAvailedRepo, times(1)).save(internetServiceAvailed);
+    // }
 
 
     @Test

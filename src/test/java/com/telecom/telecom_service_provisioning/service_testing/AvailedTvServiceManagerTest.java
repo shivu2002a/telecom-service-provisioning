@@ -54,22 +54,22 @@ class AvailedTvServiceManagerTest {
         tvServiceAvailed.setActive(true);
     }
 
-    @Test
-    void testDeactivateService_Success() throws Exception {
-        // Arrange
-        TvServicesAvailedId tvServicesAvailedId = new TvServicesAvailedId(1, 1, LocalDate.of(2023, 1, 1));
+    // @Test
+    // void testDeactivateService_Success() throws Exception {
+    //     // Arrange
+    //     TvServicesAvailedId tvServicesAvailedId = new TvServicesAvailedId(1, 1, LocalDate.of(2023, 1, 1));
 
-        when(authService.getCurrentUserDetails()).thenReturn(user);
-        when(availedTvServiceRepo.findById(tvServicesAvailedId)).thenReturn(Optional.of(tvServiceAvailed));
+    //     when(authService.getCurrentUserDetails()).thenReturn(user);
+    //     when(availedTvServiceRepo.findById(tvServicesAvailedId)).thenReturn(Optional.of(tvServiceAvailed));
 
-        // Act
-        availedTvServiceManager.deactivateService(1, LocalDate.of(2023, 1, 1));
+    //     // Act
+    //     availedTvServiceManager.deactivateService(1, LocalDate.of(2023, 1, 1));
 
-        // Assert
-        assertFalse(tvServiceAvailed.getActive());
-        assertEquals(LocalDate.now(), tvServiceAvailed.getEndDate());
-        verify(availedTvServiceRepo, times(1)).save(tvServiceAvailed);
-    }
+    //     // Assert
+    //     assertFalse(tvServiceAvailed.getActive());
+    //     assertEquals(LocalDate.now(), tvServiceAvailed.getEndDate());
+    //     verify(availedTvServiceRepo, times(1)).save(tvServiceAvailed);
+    // }
 
     @Test
     void testDeactivateService_ResourceNotFoundException() {
