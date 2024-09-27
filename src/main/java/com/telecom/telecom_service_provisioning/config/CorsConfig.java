@@ -1,6 +1,6 @@
 package com.telecom.telecom_service_provisioning.config;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.web.cors.CorsConfiguration;
@@ -16,16 +16,21 @@ import java.util.List;
 
 @Configuration
 public class CorsConfig {
-
+    
+    @Value("${react.origin}")
+    private String origin;
+    
     @Bean
     public WebMvcConfigurer webMvcConfigurer(){
+
+
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowedOrigins("http://localhost:3000").allowCredentials(true);
+                        .allowedOrigins("http://localhost:3000", origin).allowCredentials(true);
             }
         };
     }
