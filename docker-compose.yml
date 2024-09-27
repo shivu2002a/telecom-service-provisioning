@@ -21,7 +21,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://host:3306/telcoservice?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: your-password
-      REACT_ORIGIN: http://18.206.164.45
+      REACT_ORIGIN: http://host:3000
       SPRING_MAIL_PASSWORD: your-password
     ports:
       - "8082:8082"
