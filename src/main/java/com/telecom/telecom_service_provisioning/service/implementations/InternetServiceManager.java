@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
+import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.MaxServicesAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.repository.InternetServiceAvailedRepository;
@@ -110,7 +111,7 @@ public class InternetServiceManager implements InternetServiceManagerInterface {
 
     public void sendSubscribedMail(InternetService service, InternetServiceAvailed availed)  {
         ActivationMailDto dto = new ActivationMailDto();
-        User user = authService.getCurrentUserDetails();
+        UserDetailsDto user = authService.getUserDetailsByUserId(availed.getUserId());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         dto.setSubject("Internet Service Subscribed");

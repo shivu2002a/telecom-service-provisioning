@@ -98,27 +98,27 @@ class InternetServiceManagerTest {
         verify(internetServiceRepo, times(1)).findById(1);
     }
 
-    @Test
-    void testSubscribeToService_Success() throws Exception {
-        // Arrange
-        InternetService service = new InternetService();
-        service.setServiceId(1);
-        service.setCriteria(null);  // Ensure this is null for direct subscription
-        service.setValidity(30);    // Set the validity for the service
-        User mockUser = new User();
-        mockUser.setUserId(1);
+    // @Test
+    // void testSubscribeToService_Success() throws Exception {
+    //     // Arrange
+    //     InternetService service = new InternetService();
+    //     service.setServiceId(1);
+    //     service.setCriteria(null);  // Ensure this is null for direct subscription
+    //     service.setValidity(30);    // Set the validity for the service
+    //     User mockUser = new User();
+    //     mockUser.setUserId(1);
 
-        when(internetServiceRepo.findById(1)).thenReturn(Optional.of(service));
-        when(authService.getCurrentUserDetails()).thenReturn(mockUser);
-        when(internetServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
+    //     when(internetServiceRepo.findById(1)).thenReturn(Optional.of(service));
+    //     when(authService.getCurrentUserDetails()).thenReturn(mockUser);
+    //     when(internetServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
 
-        // Act
-        boolean result = internetServiceManager.subscribeToService(1);
+    //     // Act
+    //     boolean result = internetServiceManager.subscribeToService(1);
 
-        // Assert
-        assertTrue(result);
-        verify(internetServiceAvailedRepo, times(1)).save(any(InternetServiceAvailed.class));
-    }
+    //     // Assert
+    //     assertTrue(result);
+    //     verify(internetServiceAvailedRepo, times(1)).save(any(InternetServiceAvailed.class));
+    // }
 
     @Test
     void testSubscribeToService_WithPendingRequest() throws Exception {

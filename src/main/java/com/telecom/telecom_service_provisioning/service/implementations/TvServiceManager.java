@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestServiceType;
 import com.telecom.telecom_service_provisioning.constant.PendingRequestStatus;
 import com.telecom.telecom_service_provisioning.dto.ModifySubscription;
+import com.telecom.telecom_service_provisioning.dto.UserDetailsDto;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.MaxServicesAlreadyAvailedException;
 import com.telecom.telecom_service_provisioning.exception_handling.customExceptions.ResourceNotFoundException;
 import com.telecom.telecom_service_provisioning.model.PendingRequest;
@@ -108,7 +109,7 @@ public class TvServiceManager implements TvServiceManagerInterface {
 
     public void sendSubscribedMail(TvService tvService, TvServiceAvailed availed)  {
         ActivationMailDto dto = new ActivationMailDto();
-        User user = authService.getCurrentUserDetails();
+        UserDetailsDto user = authService.getUserDetailsByUserId(availed.getUserId());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         dto.setSubject("Tv Service Subscribed");

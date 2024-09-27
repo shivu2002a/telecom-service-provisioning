@@ -1,0 +1,17 @@
+sudo apt-get update
+sudo apt-get install docker.io -y
+sudo systemctl start docker
+sudo docker run hello-world
+sudo systemctl enable docker
+docker --version
+sudo usermod -a -G docker $(whoami)
+newgrp docker
+sudo apt install git
+git --version
+git config --global user.name ""
+
+git config --global user.email ""
+git clone https://github.com/shivu2002a/telecom-docker-compose.git
+cd telecom-docker-compose
+sudo apt-get install docker-compose-v2
+docker compose up

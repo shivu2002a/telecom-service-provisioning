@@ -24,7 +24,7 @@ public interface TvServiceAvailedRepository extends JpaRepository<TvServiceAvail
 
     List<TvServiceAvailed> findByUserId(Integer userId);
 
-     @Query(value = "SELECT ServiceID, COUNT(ServiceID) AS count FROM Tv_Services_Availed GROUP BY ServiceID ORDER BY count LIMIT 5", nativeQuery = true)
+     @Query(value = "SELECT ServiceID, COUNT(ServiceID) AS count FROM tv_services_availed GROUP BY ServiceID ORDER BY count LIMIT 5", nativeQuery = true)
     List<Object[]> findServiceIdAndCount();
 
     @Query("SELECT i FROM TvServiceAvailed i WHERE i.userId = :userId AND i.serviceId = :serviceId AND i.startDate = :startDate AND i.active = true")

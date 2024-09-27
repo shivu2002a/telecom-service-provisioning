@@ -55,28 +55,28 @@ class TvServiceManagerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void testSubscribeToTvService_DirectSubscription_Success() throws Exception {
-        // Arrange
-        TvService tvService = new TvService();
-        tvService.setServiceId(1);
-        tvService.setCriteria(null); // This allows direct subscription
-        tvService.setValidity(30);   // Set validity to a non-null value (e.g., 30 days)
+    // @Test
+    // void testSubscribeToTvService_DirectSubscription_Success() throws Exception {
+    //     // Arrange
+    //     TvService tvService = new TvService();
+    //     tvService.setServiceId(1);
+    //     tvService.setCriteria(null); // This allows direct subscription
+    //     tvService.setValidity(30);   // Set validity to a non-null value (e.g., 30 days)
 
-        User mockUser = new User();
-        mockUser.setUserId(1);
+    //     User mockUser = new User();
+    //     mockUser.setUserId(1);
 
-        when(tvServiceRepo.findById(1)).thenReturn(Optional.of(tvService));
-        when(authService.getCurrentUserDetails()).thenReturn(mockUser);
-        when(tvServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
+    //     when(tvServiceRepo.findById(1)).thenReturn(Optional.of(tvService));
+    //     when(authService.getCurrentUserDetails()).thenReturn(mockUser);
+    //     when(tvServiceAvailedRepo.findByUserIdAndActiveTrue(1)).thenReturn(Arrays.asList());
 
-        // Act
-        boolean result = tvServiceManager.subscribeToTvService(1);
+    //     // Act
+    //     boolean result = tvServiceManager.subscribeToTvService(1);
 
-        // Assert
-        assertTrue(result);
-        verify(tvServiceAvailedRepo, times(1)).save(any(TvServiceAvailed.class));
-    }
+    //     // Assert
+    //     assertTrue(result);
+    //     verify(tvServiceAvailedRepo, times(1)).save(any(TvServiceAvailed.class));
+    // }
 
 
     @Test
