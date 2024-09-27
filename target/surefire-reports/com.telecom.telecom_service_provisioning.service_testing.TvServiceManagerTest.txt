@@ -1,13 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.telecom.telecom_service_provisioning.service_testing.TvServiceManagerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.060 s <<< FAILURE! -- in com.telecom.telecom_service_provisioning.service_testing.TvServiceManagerTest
-com.telecom.telecom_service_provisioning.service_testing.TvServiceManagerTest.testAvailTvService_Success -- Time elapsed: 0.005 s <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "com.telecom.telecom_service_provisioning.model.User.getUsername()" because "user" is null
-	at com.telecom.telecom_service_provisioning.service.implementations.TvServiceManager.sendSubscribedMail(TvServiceManager.java:112)
-	at com.telecom.telecom_service_provisioning.service.implementations.TvServiceManager.availTvService(TvServiceManager.java:106)
-	at com.telecom.telecom_service_provisioning.service_testing.TvServiceManagerTest.testAvailTvService_Success(TvServiceManagerTest.java:137)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.telecom.telecom_service_provisioning.service_testing.TvServiceManagerTest

@@ -18,11 +18,11 @@ services:
     # depends_on:
     #   - mysql-db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://host:3306/telcoservice?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://telcoservice.cgjo1ce0bjzp.us-east-1.rds.amazonaws.com:3306/telcoservice?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: your-password
-      REACT_ORIGIN: http://host:3000
-      SPRING_MAIL_PASSWORD: your-password
+      SPRING_DATASOURCE_PASSWORD: Localhost3306
+      REACT_ORIGIN: http://18.206.164.45
+      SPRING_MAIL_PASSWORD: fxjkbgdwzuhafxip
     ports:
       - "8082:8082"
     networks:
@@ -35,7 +35,7 @@ services:
     depends_on:
       - spring-application
     environment:
-      REACT_APP_BACKEND_URL: http://host:8082
+      REACT_APP_BACKEND_URL: http://18.206.164.45:8082
     ports:
       - "3000:3000"
     networks:

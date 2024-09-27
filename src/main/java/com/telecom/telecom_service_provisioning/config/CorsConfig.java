@@ -23,10 +23,10 @@ public class CorsConfig {
     @Bean
     public WebMvcConfigurer webMvcConfigurer(){
 
-
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
+                System.out.println("From Cors config bean : " + origin);
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                         .allowedHeaders("*")

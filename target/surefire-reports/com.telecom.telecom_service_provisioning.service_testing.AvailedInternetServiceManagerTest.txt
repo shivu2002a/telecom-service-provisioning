@@ -1,13 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.telecom.telecom_service_provisioning.service_testing.AvailedInternetServiceManagerTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.104 s <<< FAILURE! -- in com.telecom.telecom_service_provisioning.service_testing.AvailedInternetServiceManagerTest
-com.telecom.telecom_service_provisioning.service_testing.AvailedInternetServiceManagerTest.testDeactivateService_Success -- Time elapsed: 0.008 s <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "com.telecom.telecom_service_provisioning.service.implementations.InternetServiceManager.getInternetServiceDetails(java.lang.Integer)" because "this.internetService" is null
-	at com.telecom.telecom_service_provisioning.service.implementations.AvailedInternetServiceManager.sendTerminationMail(AvailedInternetServiceManager.java:67)
-	at com.telecom.telecom_service_provisioning.service.implementations.AvailedInternetServiceManager.deactivateService(AvailedInternetServiceManager.java:55)
-	at com.telecom.telecom_service_provisioning.service_testing.AvailedInternetServiceManagerTest.testDeactivateService_Success(AvailedInternetServiceManagerTest.java:93)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.197 s -- in com.telecom.telecom_service_provisioning.service_testing.AvailedInternetServiceManagerTest
